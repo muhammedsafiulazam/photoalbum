@@ -34,9 +34,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/album_imv_cover"
-        android:layout_width="@dimen/albumlist_album_imv_size"
-        android:layout_height="@dimen/albumlist_album_imv_size"
-        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/gdlBottom"

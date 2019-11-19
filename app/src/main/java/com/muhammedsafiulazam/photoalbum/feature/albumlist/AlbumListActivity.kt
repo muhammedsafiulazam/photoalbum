@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
@@ -42,8 +43,8 @@ class AlbumListActivity : BaseActivity(), IAlbumListListener {
         updateLoader(false)
 
         // Initialize recycler view.
-        val linearLayoutManager = LinearLayoutManager(this)
-        albumlist_ryv_items.setLayoutManager(linearLayoutManager)
+        val gridLayoutManager = GridLayoutManager(this, AlbumListAdapter.SPAN_SIZE)
+        albumlist_ryv_items.setLayoutManager(gridLayoutManager)
         albumlist_ryv_items.adapter = mAlbumListAdapter
 
         albumlist_btn_retry.setOnClickListener(View.OnClickListener {
