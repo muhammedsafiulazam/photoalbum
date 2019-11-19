@@ -33,7 +33,7 @@
         app:layout_constraintGuide_end="@dimen/view_margin_small" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/album_imv_cover"
+        android:id="@+id/album_imv_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitCenter"

@@ -28,6 +28,9 @@
         <activity android:name="com.muhammedsafiulazam.photoalbum.feature.albumlist.AlbumListActivity"
                 android:label="@string/albumlist_title"
                 />
+        <activity android:name="com.muhammedsafiulazam.photoalbum.feature.photolist.PhotoListActivity"
+            android:label="@string/photolist_title"
+            />
     </application>
 
 </manifest>

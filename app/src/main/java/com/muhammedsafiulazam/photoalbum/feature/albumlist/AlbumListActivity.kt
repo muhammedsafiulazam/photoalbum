@@ -6,7 +6,6 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
 import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
@@ -15,6 +14,7 @@ import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.event.AlbumListEventType
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
+import com.muhammedsafiulazam.photoalbum.feature.photolist.PhotoListActivity
 import kotlinx.android.synthetic.main.activity_albumlist.*
 
 
@@ -23,8 +23,8 @@ import kotlinx.android.synthetic.main.activity_albumlist.*
  */
 
 class AlbumListActivity : BaseActivity(), IAlbumListListener {
-    private lateinit var eventManager: IEventManager
-    private lateinit var activityManager: IActivityManager
+    private lateinit var mEventManager: IEventManager
+    private lateinit var mActivityManager: IActivityManager
     private val mAlbumList: MutableList<Album> = mutableListOf()
     private val mAlbumListAdapter: AlbumListAdapter by lazy {
         AlbumListAdapter(mAlbumList, this)
@@ -36,8 +36,8 @@ class AlbumListActivity : BaseActivity(), IAlbumListListener {
         setContentView(R.layout.activity_albumlist)
         setActivityModel(AlbumListActivityModel::class.java)
 
-        eventManager = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager
-        activityManager = getAddOn(AddOnType.ACTIVITY_MANAGER) as IActivityManager
+        mEventManager = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager
+        mActivityManager = getAddOn(AddOnType.ACTIVITY_MANAGER) as IActivityManager
 
         updateMessage(null)
         updateLoader(false)
@@ -52,6 +52,11 @@ class AlbumListActivity : BaseActivity(), IAlbumListListener {
         })
 
         receiveEvents(true)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        requestLoadAlbums()
     }
 
     fun updateLoader(show: Boolean) {
@@ -85,12 +90,12 @@ class AlbumListActivity : BaseActivity(), IAlbumListListener {
     }
 
     override fun onClickAlbum(album: Album) {
-        println("onClickAlbum")
+        mActivityManager.loadActivity(PhotoListActivity::class.java, album)
     }
 
     private fun requestLoadAlbums() {
         val event = Event(AlbumListEventType.REQUEST_LOAD_ALBUMS, null, null)
-        eventManager.send(event)
+        mEventManager.send(event)
     }
 
     override fun onReceiveEvents(event: Event) {

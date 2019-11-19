@@ -27,7 +27,6 @@ class AlbumListActivityModel : BaseActivityModel() {
         serviceManager = getAddOn(AddOnType.SERVICE_MANAGER) as IServiceManager
 
         receiveEvents(true)
-        requestLoadAlbums()
     }
 
     private fun updateLoader(busy: Boolean) {
