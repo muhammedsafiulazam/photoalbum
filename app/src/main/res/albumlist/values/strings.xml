@@ -1,0 +1,5 @@
+<resources>
+    <string name="albumlist_title">Albums</string>
+    <string name="albumlist_error_load">Sorry! Failed to load albums.</string>
+    <string name="albumist_button_retry">Retry</string>
+</resources>
