@@ -14,5 +14,5 @@ interface IPhotoCall {
      * @return list of photo
      */
     @GET("img/shared/technical-test.json")
-    fun getBooks() : Call<List<Photo>>
+    fun getPhotos() : Call<List<Photo>>
 }

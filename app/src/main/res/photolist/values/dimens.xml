@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="photolist_pgb_size">30dp</dimen>
+
+    <dimen name="photolist_photo_imv_size">256dp</dimen>
+    <dimen name="photolist_photo_pgb_size">30dp</dimen>
+</resources>

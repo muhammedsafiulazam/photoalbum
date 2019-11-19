@@ -1,0 +1,5 @@
+<resources>
+    <string name="photolist_title">Photos</string>
+    <string name="photolist_error_load">Sorry! Failed to load photos.</string>
+    <string name="photolist_button_retry">Retry</string>
+</resources>

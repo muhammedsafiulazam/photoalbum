@@ -22,16 +22,16 @@ class PhotoService : AddOn(), IPhotoService {
      */
     override fun getPhotos() {
         // Server manager.
-        val serverManager: IServerManager? = getAddOn(AddOnType.SERVER_MANAGER) as IServerManager?
+        val serverManager: IServerManager = getAddOn(AddOnType.SERVER_MANAGER) as IServerManager
 
         // Service call.
-        val call: Call<List<Photo>> = serverManager!!.getPhotoServer().getPhotoCall().getBooks()
+        val call: Call<List<Photo>> = serverManager.getPhotoServer().getPhotoCall().getPhotos()
 
         // Queue manager.
-        val queueManager: IQueueManager? = getAddOn(AddOnType.QUEUE_MANAGER) as IQueueManager?
+        val queueManager: IQueueManager = getAddOn(AddOnType.QUEUE_MANAGER) as IQueueManager
 
         // Push in queue.
-        queueManager!!.execute(call as Call<Any>, callback = { response: Response<Any> ->
+        queueManager.execute(call as Call<Any>, callback = { response: Response<Any> ->
             var books: List<Photo>? = null
             var error: Error? = null
 

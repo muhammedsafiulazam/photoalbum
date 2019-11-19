@@ -15,9 +15,4 @@ interface IQueueManager : IAddOn {
      * @param callback callback for response
      */
     fun execute(call: Call<Any>, callback: (response: Response<Any>) -> Unit)
-
-    /**
-     * Shutdown manager.
-     */
-    fun shutdown()
 }
