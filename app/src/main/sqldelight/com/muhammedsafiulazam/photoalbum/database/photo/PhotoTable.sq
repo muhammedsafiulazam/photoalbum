@@ -1,0 +1,32 @@
+import java.lang.Double;
+import java.lang.Float;
+import java.lang.Integer;
+
+CREATE TABLE PhotoTable (
+    albumId TEXT,
+    id TEXT PRIMARY KEY NOT NULL,
+    title TEXT,
+    url TEXT,
+    thumbnailUrl TEXT);
+
+selectById:
+SELECT * FROM PhotoTable WHERE id = ?;
+
+selectByAlbumId:
+SELECT * FROM PhotoTable WHERE albumId = ?;
+
+selectAll:
+SELECT * FROM PhotoTable;
+
+insert:
+INSERT OR REPLACE INTO PhotoTable (albumId, id, title, url, thumbnailUrl)
+VALUES (?, ?, ?, ?, ?);
+
+deleteById:
+DELETE FROM PhotoTable WHERE id = ?;
+
+deleteByAlbumId:
+DELETE FROM PhotoTable WHERE albumId = ?;
+
+deleteAll:
+DELETE FROM PhotoTable;

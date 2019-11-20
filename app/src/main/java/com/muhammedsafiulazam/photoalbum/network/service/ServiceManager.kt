@@ -11,9 +11,9 @@ import com.muhammedsafiulazam.photoalbum.network.service.photo.PhotoService
 class ServiceManager : AddOn(), IServiceManager {
 
     private val mPhotoService: IPhotoService by lazy {
-        val bookService = PhotoService()
-        bookService.addAddOns(getAddOns())
-        bookService
+        val photoService = PhotoService()
+        photoService.addAddOns(getAddOns())
+        photoService
     }
 
     /**

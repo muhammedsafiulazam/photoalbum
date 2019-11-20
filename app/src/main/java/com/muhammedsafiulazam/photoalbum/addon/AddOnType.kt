@@ -11,5 +11,5 @@ object AddOnType {
     const val EVENT_MANAGER: String = "EVENT_MANAGER"
     const val RETROFIT_MANAGER: String = "RETROFIT_MANAGER"
     const val QUEUE_MANAGER: String = "QUEUE_MANAGER"
-    const val CART_MANAGER: String = "CART_MANAGER"
+    const val DATABASE_MANAGER: String = "DATABASE_MANAGER"
 }

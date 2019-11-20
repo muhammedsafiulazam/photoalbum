@@ -1,6 +1,6 @@
 package com.muhammedsafiulazam.photoalbum.addon
 
-open class AddOn {
+open class AddOn : IAddOn {
     // List of addons.
     private val mAddOns: MutableMap<String, IAddOn> = mutableMapOf()
 
@@ -9,7 +9,7 @@ open class AddOn {
      * @param type type of addon
      * @return addon for type
      */
-    fun getAddOn(type: String) : IAddOn? {
+    override fun getAddOn(type: String) : IAddOn? {
         return mAddOns.get(type)
     }
 
@@ -17,7 +17,7 @@ open class AddOn {
      * Get addons.
      * @return map of addons
      */
-    fun getAddOns() : Map<String, IAddOn> {
+    override fun getAddOns() : Map<String, IAddOn> {
         return mAddOns
     }
 
@@ -26,7 +26,7 @@ open class AddOn {
      * @param type type of addon
      * @param addOn addon to be added
      */
-    fun addAddOn(type: String, addOn: IAddOn) {
+    override fun addAddOn(type: String, addOn: IAddOn) {
         mAddOns.put(type, addOn)
     }
 
@@ -34,7 +34,7 @@ open class AddOn {
      * Add addons.
      * @param addons map of addons
      */
-    fun addAddOns(addons: Map<String, IAddOn>) {
+    override fun addAddOns(addons: Map<String, IAddOn>) {
         mAddOns.putAll(addons)
     }
 
@@ -42,7 +42,7 @@ open class AddOn {
      * Remove addon.
      * @param type type of addon
      */
-    fun removeAddOn(type: String) {
+    override fun removeAddOn(type: String) {
         mAddOns.remove(type)
     }
 
@@ -50,7 +50,7 @@ open class AddOn {
      * Remove addons.
      * @param types types of addons
      */
-    fun removeAddOns(types: List<String>) {
+    override fun removeAddOns(types: List<String>) {
         types.forEach { key ->
             mAddOns.remove(key)
         }
@@ -59,7 +59,7 @@ open class AddOn {
     /**
      * Clear addons.
      */
-    open fun clearAddOns() {
+    open override fun clearAddOns() {
         // Clear.
         mAddOns.clear()
     }

@@ -4,7 +4,7 @@ import com.muhammedsafiulazam.photoalbum.addon.AddOn
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
-import com.muhammedsafiulazam.photoalbum.network.event.book.PhotoEventType
+import com.muhammedsafiulazam.photoalbum.network.service.photo.event.PhotoServiceEventType
 import com.muhammedsafiulazam.photoalbum.network.model.Error
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.network.queue.IQueueManager
@@ -32,18 +32,16 @@ class PhotoService : AddOn(), IPhotoService {
 
         // Push in queue.
         queueManager.execute(call as Call<Any>, callback = { response: Response<Any> ->
-            var books: List<Photo>? = null
+            var photos: List<Photo>? = null
             var error: Error? = null
 
             if (response.isSuccessful()) {
-                books = (response as Response<List<Photo>>).body()
+                photos = (response as Response<List<Photo>>).body()
             } else {
                 error = Error(response.code(), response.errorBody()?.toString())
             }
 
-            val event = Event(PhotoEventType.GET_PHOTOS, books, error)
-
-            // Event manager.
+            val event = Event(PhotoServiceEventType.GET_PHOTOS, photos, error)
             val eventManager: IEventManager? = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager?
             eventManager!!.send(event)
         })

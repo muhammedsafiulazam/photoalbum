@@ -1,107 +1,78 @@
 package com.muhammedsafiulazam.photoalbum.addon
 
-import android.content.Context
-import android.content.res.Resources
 import com.muhammedsafiulazam.photoalbum.activity.ActivityManager
-import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
+import com.muhammedsafiulazam.photoalbum.database.DatabaseManager
 import com.muhammedsafiulazam.photoalbum.event.EventManager
-import com.muhammedsafiulazam.photoalbum.event.IEventManager
-import com.muhammedsafiulazam.photoalbum.network.queue.IQueueManager
 import com.muhammedsafiulazam.photoalbum.network.queue.QueueManager
-import com.muhammedsafiulazam.photoalbum.network.retrofit.IRetrofitManager
 import com.muhammedsafiulazam.photoalbum.network.retrofit.RetrofitManager
-import com.muhammedsafiulazam.photoalbum.network.server.IServerManager
 import com.muhammedsafiulazam.photoalbum.network.server.ServerManager
-import com.muhammedsafiulazam.photoalbum.network.service.IServiceManager
 import com.muhammedsafiulazam.photoalbum.network.service.ServiceManager
 
-object AddOnManager : AddOn(), IAddOn {
+object AddOnManager : IAddOnManager {
 
-    // Context.
-    private var mContext: Context? = null
-
-    // Activity manager.
-    private val mActivityManager: IActivityManager by lazy {
-        ActivityManager()
+    private val mAddOn: IAddOn by lazy {
+        val addOn = AddOn()
+        addAddOns(addOn)
+        addOn
     }
 
-    // Server manager.
-    private val mServerManager: IServerManager by lazy {
-        ServerManager()
+    override fun getAddOn(type: String): IAddOn? {
+        return mAddOn.getAddOn(type)
     }
 
-    // Service manager.
-    private val mServiceManager: IServiceManager by lazy {
-        ServiceManager()
+    override fun getAddOns(): Map<String, IAddOn> {
+        return mAddOn.getAddOns()
     }
 
-    // Event manager.
-    private val mEventManager: IEventManager by lazy {
-        EventManager()
+    override fun addAddOn(type: String, addOn: IAddOn) {
+        mAddOn.addAddOn(type, addOn)
     }
 
-    // Retrofit manager.
-    private val mRetrofitManger: IRetrofitManager by lazy {
-        RetrofitManager()
+    override fun addAddOns(addons: Map<String, IAddOn>) {
+        mAddOn.addAddOns(addons)
     }
 
-    // Queue manager.
-    private val mQueueManager: IQueueManager by lazy {
-        QueueManager()
+    override fun removeAddOn(type: String) {
+        mAddOn.removeAddOn(type)
     }
 
-    /**
-     * Initialize with context.
-     * @param context context
-     */
-    fun initialize(context: Context) {
-        mContext = context
-        onInitialize()
+    override fun removeAddOns(types: List<String>) {
+        mAddOn.removeAddOns(types)
     }
 
-    private fun onInitialize() {
-        // Activity manager.
-        addAddOn(AddOnType.ACTIVITY_MANAGER, mActivityManager)
+    override fun clearAddOns() {
+        mAddOn.clearAddOns()
+    }
 
-        // Server manager.
-        addAddOn(AddOnType.SERVER_MANAGER, mServerManager)
+    private fun addAddOns(addOn: IAddOn) {
 
-        // Service manager.
-        addAddOn(AddOnType.SERVICE_MANAGER, mServiceManager)
-
-        // Event manager.
-        addAddOn(AddOnType.EVENT_MANAGER, mEventManager)
-
-        // Retrofit manager.
-        addAddOn(AddOnType.RETROFIT_MANAGER, mRetrofitManger)
-
-        // Queue manager.
-        addAddOn(AddOnType.QUEUE_MANAGER, mQueueManager)
+        val activityManager = ActivityManager()
+        val serverManager = ServerManager()
+        val serviceManager = ServiceManager()
+        val eventManager = EventManager()
+        val retrofitManager = RetrofitManager()
+        val queueManager = QueueManager()
+        val databaseManager = DatabaseManager()
 
         // Now assign individually.
 
         // Service manager.
-        mServiceManager.addAddOn(AddOnType.SERVER_MANAGER, mServerManager)
-        mServiceManager.addAddOn(AddOnType.EVENT_MANAGER, mEventManager)
-        mServiceManager.addAddOn(AddOnType.QUEUE_MANAGER, mQueueManager)
+        serviceManager.addAddOn(AddOnType.SERVER_MANAGER, serverManager)
+        serviceManager.addAddOn(AddOnType.EVENT_MANAGER, eventManager)
+        serviceManager.addAddOn(AddOnType.QUEUE_MANAGER, queueManager)
 
         // Server manager.
-        mServerManager.addAddOn(AddOnType.RETROFIT_MANAGER, mRetrofitManger)
-    }
+        serverManager.addAddOn(AddOnType.RETROFIT_MANAGER, retrofitManager)
 
-    /**
-     * Get context.
-     * @return context
-     */
-    fun getContext() : Context {
-        return mContext!!
-    }
+        // Database manager.
+        databaseManager.addAddOn(AddOnType.EVENT_MANAGER, eventManager)
 
-    /**
-     * Get resources.
-     * @return resources
-     */
-    fun getResources() : Resources {
-        return mContext!!.resources
+        addOn.addAddOn(AddOnType.ACTIVITY_MANAGER, activityManager)
+        addOn.addAddOn(AddOnType.SERVER_MANAGER, serverManager)
+        addOn.addAddOn(AddOnType.SERVICE_MANAGER, serviceManager)
+        addOn.addAddOn(AddOnType.EVENT_MANAGER, eventManager)
+        addOn.addAddOn(AddOnType.RETROFIT_MANAGER, retrofitManager)
+        addOn.addAddOn(AddOnType.QUEUE_MANAGER, queueManager)
+        addOn.addAddOn(AddOnType.DATABASE_MANAGER, databaseManager)
     }
 }

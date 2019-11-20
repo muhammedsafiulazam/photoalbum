@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: "com.squareup.sqldelight"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -74,6 +76,7 @@ dependencies {
     // classpath.
     androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.1.0'
 
+    testImplementation "com.squareup.sqldelight:sqlite-driver:1.2.0"
 
     // Mockito
     testImplementation "org.mockito:mockito-core:2.19.0"
@@ -109,8 +112,17 @@ dependencies {
 
     // Lifecycle
     implementation 'android.arch.lifecycle:extensions:1.1.1'
+
+    // Database
+    implementation "com.squareup.sqldelight:android-driver:1.2.0"
 }
 
 androidExtensions {
     experimental = true
+}
+
+sqldelight {
+    PhotoDB {
+        packageName = "com.muhammedsafiulazam.photoalbum.database.photo"
+    }
 }
