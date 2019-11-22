@@ -32,7 +32,7 @@ class DatabaseManagerUnitTest : BaseUnitTest() {
 
         databaseManager.getPhotoDatabase().savePhotos(createDummyPhotos())
 
-        delay(1000)
+        delay(DELAY_MINIMUM)
         asserter.assertTrue("", e != null && e!!.data != null)
     }
 

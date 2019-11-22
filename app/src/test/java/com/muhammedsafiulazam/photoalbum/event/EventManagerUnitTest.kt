@@ -26,7 +26,7 @@ class EventManagerUnitTest : BaseUnitTest() {
 
         eventManager.send(createDummyEvent())
 
-        delay(1000)
+        delay(DELAY_MINIMUM)
         asserter.assertTrue("", e != null && e!!.data != null && e!!.error != null)
     }
 

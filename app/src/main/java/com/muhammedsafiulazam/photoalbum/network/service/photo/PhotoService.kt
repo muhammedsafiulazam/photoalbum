@@ -10,6 +10,7 @@ import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.network.queue.IQueueManager
 import com.muhammedsafiulazam.photoalbum.network.server.IServerManager
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
+import com.muhammedsafiulazam.photoalbum.utils.ErrorUtils
 import retrofit2.Call
 import retrofit2.Response
 
@@ -48,7 +49,7 @@ class PhotoService : AddOn(), IPhotoService {
                 eventManager!!.send(event)
             })
         } else {
-            val event = Event(PhotoServiceEventType.GET_PHOTOS, null, Error(null, "Error: No connectivity."))
+            val event = Event(PhotoServiceEventType.GET_PHOTOS, null, ErrorUtils.noConnectivity())
             val eventManager: IEventManager? = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager?
             eventManager!!.send(event)
         }
