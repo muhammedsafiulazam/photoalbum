@@ -43,6 +43,10 @@ android {
     useLibrary 'android.test.runner'
     useLibrary 'android.test.base'
     useLibrary 'android.test.mock'
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -101,6 +105,10 @@ dependencies {
     testImplementation 'androidx.test:runner:1.2.0'
     testImplementation 'androidx.test:rules:1.2.0'
 
+    // Kotlin.
+    testImplementation ('org.jetbrains.kotlin:kotlin-test')
+    testImplementation ('org.jetbrains.kotlin:kotlin-test-junit')
+
     // SQLDelight.
     testImplementation "com.squareup.sqldelight:sqlite-driver:1.2.0"
 
@@ -119,6 +127,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
     androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0'
+
+    // Mockk.
+    testImplementation ("io.mockk:mockk:1.9.3")
+
+    // Arbitrater.
+    testImplementation ("com.tyro.oss:arbitrater:0.0.6")
 }
 
 androidExtensions {

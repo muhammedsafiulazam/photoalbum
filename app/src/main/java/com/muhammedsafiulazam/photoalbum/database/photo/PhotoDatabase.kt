@@ -6,6 +6,7 @@ import com.muhammedsafiulazam.photoalbum.database.photo.event.PhotoDatabaseEvent
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
+import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
 import com.squareup.sqldelight.Query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
 class PhotoDatabase(val db: PhotoDB) : AddOn(), IPhotoDatabase {
 
     override fun getPhotos() {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(CoroutineUtils.DISPATCHER_IO) {
             var photos: ArrayList<Photo> = arrayListOf()
 
             val photoTableQueries: Query<PhotoTable> = db.photoTableQueries.selectAll()
@@ -37,7 +38,7 @@ class PhotoDatabase(val db: PhotoDB) : AddOn(), IPhotoDatabase {
     }
 
     override fun savePhotos(photos: List<Photo>) {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(CoroutineUtils.DISPATCHER_IO) {
             photos.forEach { photo ->
                 db.photoTableQueries.insert(
                     photo.albumId,
@@ -55,7 +56,7 @@ class PhotoDatabase(val db: PhotoDB) : AddOn(), IPhotoDatabase {
     }
 
     override fun cleanPhotos() {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(CoroutineUtils.DISPATCHER_IO) {
             db.photoTableQueries.deleteAll()
 
             val event = Event(PhotoDatabaseEventType.CLEAN_PHOTOS, null, null)

@@ -1,6 +1,7 @@
 package com.muhammedsafiulazam.photoalbum.event
 
 import com.muhammedsafiulazam.photoalbum.addon.IAddOn
+import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlin.coroutines.CoroutineContext
@@ -15,7 +16,7 @@ interface IEventManager : IAddOn {
      * @param event sent event
      * @param context use context
      */
-    fun send(event: Event, context: CoroutineContext = Dispatchers.Main)
+    fun send(event: Event, context: CoroutineContext = CoroutineUtils.DISPATCHER_MAIN)
 
     /**
      * Subscribe to receiving mChannel.
@@ -29,7 +30,7 @@ interface IEventManager : IAddOn {
      * @param context use context
      * @return receiving mChannel
      */
-    fun subscribe(callback: (event: Event) -> Unit, context: CoroutineContext = Dispatchers.Main) : ReceiveChannel<Event>
+    fun subscribe(callback: (event: Event) -> Unit, context: CoroutineContext = CoroutineUtils.DISPATCHER_MAIN) : ReceiveChannel<Event>
 
     /**
      * Unsubscribe from receiving mChannel.

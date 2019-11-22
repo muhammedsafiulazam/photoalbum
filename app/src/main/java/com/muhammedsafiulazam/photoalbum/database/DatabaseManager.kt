@@ -13,17 +13,8 @@ import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 
 class DatabaseManager : AddOn(), IDatabaseManager {
-
-    private val NAME_PHOTO_DB: String = "Photo.db"
-
-    private val mPhotoDB: PhotoDB by lazy {
-        val contextManager: IContextManager? = AddOnManager.getAddOn(AddOnType.CONTEXT_MANAGER) as IContextManager?
-        val sqlDriver: SqlDriver = AndroidSqliteDriver(PhotoDB.Schema, contextManager!!.getContext(), NAME_PHOTO_DB)
-        PhotoDB(sqlDriver)
-    }
-
     private val mPhotoDatabase: IPhotoDatabase by lazy {
-        val photoDatabase = PhotoDatabase(mPhotoDB)
+        val photoDatabase = PhotoDatabase(PhotoDB(DatabaseUtils.PHOTO_DB_DRIVER))
         photoDatabase.addAddOns(getAddOns())
         photoDatabase
     }
