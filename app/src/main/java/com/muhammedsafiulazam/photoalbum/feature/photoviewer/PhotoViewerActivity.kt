@@ -40,6 +40,7 @@ class PhotoViewerActivity : BaseActivity() {
 
         photoviewer_txv_title.text = getString(R.string.photoviewer_photo_title, mPhoto.id)
         photoviewer_txv_description.text = mPhoto.title?.capitalize()
+        photoviewer_phv_photo.setImageDrawable(null)
 
         photoviewer_btn_retry.setOnClickListener(View.OnClickListener {
             onClickRetry()

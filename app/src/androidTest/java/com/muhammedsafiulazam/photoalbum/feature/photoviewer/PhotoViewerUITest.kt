@@ -67,14 +67,10 @@ class PhotoViewerUITest : BaseUITest() {
         intent.putExtra(BaseActivity.KEY_DATA, createDummyPhoto())
         mActivityTestRule.launchActivity(intent)
 
-        onView(withId(R.id.photoviewer_phv_photo)).check(matches(ImageViewMatcher.noDrawable()))
-        onView(withId(R.id.photoviewer_txv_message)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.photoviewer_btn_retry)).check(matches(not(isDisplayed())))
-
         runBlocking {
             delay(DELAY_AVERAGE)
 
-            onView(withId(R.id.photoviewer_phv_photo)).check(matches(not(ImageViewMatcher.noDrawable())))
+            onView(withId(R.id.photoviewer_phv_photo)).check(matches(not(ImageViewMatcher.withDrawable(-1))))
             onView(withId(R.id.photoviewer_txv_message)).check(matches(not(isDisplayed())))
             onView(withId(R.id.photoviewer_btn_retry)).check(matches(not(isDisplayed())))
         }
@@ -90,14 +86,10 @@ class PhotoViewerUITest : BaseUITest() {
         intent.putExtra(BaseActivity.KEY_DATA, createDummyPhoto())
         mActivityTestRule.launchActivity(intent)
 
-        onView(withId(R.id.photoviewer_phv_photo)).check(matches(ImageViewMatcher.noDrawable()))
-        onView(withId(R.id.photoviewer_txv_message)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.photoviewer_btn_retry)).check(matches(not(isDisplayed())))
-
         runBlocking {
-            delay(DELAY_AVERAGE)
+            delay(DELAY_MINIMUM)
 
-            onView(withId(R.id.photoviewer_phv_photo)).check(matches(ImageViewMatcher.noDrawable()))
+            onView(withId(R.id.photoviewer_phv_photo)).check(matches(ImageViewMatcher.withDrawable(-1)))
             onView(withId(R.id.photoviewer_txv_message)).check(matches(isDisplayed()))
             onView(withId(R.id.photoviewer_btn_retry)).check(matches(isDisplayed()))
         }
