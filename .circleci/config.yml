@@ -40,7 +40,7 @@ jobs:
           key: *gradle_cache
       - run:
           name: Run Tests
-          command: ./gradlew :app:test
+          command: ./gradlew :app:testDebugUnitTest
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
           destination: reports
