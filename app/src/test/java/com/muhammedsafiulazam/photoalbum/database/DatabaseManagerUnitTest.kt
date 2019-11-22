@@ -2,25 +2,18 @@ package com.muhammedsafiulazam.photoalbum.database
 
 import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
+import com.muhammedsafiulazam.photoalbum.core.BaseUnitTest
 import com.muhammedsafiulazam.photoalbum.database.photo.event.PhotoDatabaseEventType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
-import com.muhammedsafiulazam.photoalbum.utils.TestUtils
 import com.tyro.oss.arbitrater.arbitraryInstance
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import kotlin.test.asserter
 
-class DatabaseManagerUnitTest {
-
-    @Before
-    fun beforeTest() {
-        TestUtils.setup()
-    }
+class DatabaseManagerUnitTest : BaseUnitTest() {
 
     @Test
     fun getPhotos() = runBlocking {
@@ -89,10 +82,5 @@ class DatabaseManagerUnitTest {
             photos.add(i, Photo::class.arbitraryInstance())
         }
         return photos
-    }
-
-    @After
-    fun afterTest() {
-
     }
 }

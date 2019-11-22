@@ -18,6 +18,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -63,7 +64,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha08'
 
     // Moshi..
-    implementation "com.squareup.moshi:moshi-kotlin:1.8.0"
+    implementation ("com.squareup.moshi:moshi-kotlin:1.8.0") {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-reflect'
+    }
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.8.0"
 
     // Retrofit.
@@ -130,9 +133,19 @@ dependencies {
 
     // Mockk.
     testImplementation ("io.mockk:mockk:1.9.3")
+    androidTestImplementation ("io.mockk:mockk-android:1.9.3") {
+        exclude module: 'objenesis'
+    }
+    androidTestImplementation 'org.objenesis:objenesis:2.6'
+
+    // Mockito.
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.24.5'
+    androidTestImplementation 'org.mockito:mockito-android:2.24.5'
 
     // Arbitrater.
     testImplementation ("com.tyro.oss:arbitrater:0.0.6")
+    androidTestImplementation ("com.tyro.oss:arbitrater:0.0.6")
 }
 
 androidExtensions {

@@ -11,9 +11,12 @@ import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
+import com.muhammedsafiulazam.photoalbum.utils.UITestUtils
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.channels.ReceiveChannel
+import org.junit.After
 import org.junit.Assert
+import org.junit.Before
 import java.util.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -24,7 +27,7 @@ import java.util.concurrent.TimeUnit
 
 open class BaseUITest {
 
-    private val MAX_WAIT_TIME_MILLIS: Long = 5000 // 5 secs
+    private val MAX_WAIT_TIME_MILLIS: Long = 10000 // 10 secs
     private val MAX_WAIT_TIME_REACHED: String = "Max wait time reached while waiting for mEvents."
     private val EXCEPTION_OCCURRED = "Exception occurred, please check log for stacktrace.";
 

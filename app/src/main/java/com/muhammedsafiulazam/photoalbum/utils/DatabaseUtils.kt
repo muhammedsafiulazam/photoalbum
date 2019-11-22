@@ -14,10 +14,9 @@ import com.squareup.sqldelight.db.SqlDriver
  */
 
 object DatabaseUtils {
-    var PHOTO_DB_DRIVER: SqlDriver = getPhotoDBDriver()
-    private fun getPhotoDBDriver() : SqlDriver {
+    val PHOTO_DB_DRIVER: SqlDriver by lazy {
         val contextManager: IContextManager? = AddOnManager.getAddOn(AddOnType.CONTEXT_MANAGER) as IContextManager?
         val context: Context? = contextManager?.getContext()
-        return AndroidSqliteDriver(PhotoDB.Schema, context!!, "Photo.db")
+        AndroidSqliteDriver(PhotoDB.Schema, context!!, "Photo.db")
     }
 }
