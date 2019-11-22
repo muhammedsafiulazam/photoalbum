@@ -46,37 +46,29 @@ import java.util.*
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class PhotoListUITest : BaseUITest() {
-
     @Rule @JvmField
     var mActivityTestRule: ActivityTestRule<PhotoListActivity> = ActivityTestRule(PhotoListActivity::class.java, true, false)
 
-    fun loadData() = runBlocking {
-        val serviceManager: IServiceManager = AddOnManager.getAddOn(AddOnType.SERVICE_MANAGER) as IServiceManager
-        serviceManager.getPhotoService().getPhotos()
-        delay(3000)
-    }
-
     @Test
     fun loadPhotos() {
-
-        val photo: Photo = Photo::class.arbitraryInstance()
-        val album: Album = Album(photo.albumId!!, Arrays.asList(photo))
-
         wait(PhotoListEventType.RESPONSE_LOAD_PHOTOS, object : IBeforeWait {
             override fun beforeWait() {
                 val intent = Intent(getContext(), PhotoListActivity::class.java)
-                intent.putExtra(BaseActivity.KEY_DATA, album)
-
+                intent.putExtra(BaseActivity.KEY_DATA, createDummyAlbum())
                 mActivityTestRule.launchActivity(intent)
-
-                onView(withId(R.id.photolist_txv_message)).check(matches(not(isDisplayed())))
             }
 
         }, object : IAfterWait {
             override fun afterWait(events: List<Event>) {
 
                 onView(withId(R.id.photolist_ryv_items)).check(withItemCount(greaterThan(0)))
+                onView(withId(R.id.photolist_txv_message)).check(matches(not(isDisplayed())))
+                onView(withId(R.id.photolist_btn_retry)).check(matches(not(isDisplayed())))
             }
         })
+    }
+
+    private fun createDummyAlbum() : Album {
+        return Album::class.arbitraryInstance()
     }
 }

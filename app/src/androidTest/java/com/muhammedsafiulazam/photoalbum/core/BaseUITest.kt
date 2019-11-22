@@ -27,6 +27,10 @@ import java.util.concurrent.TimeUnit
 
 open class BaseUITest {
 
+    val DELAY_MINIMUM: Long = 1000
+    val DELAY_AVERAGE: Long = 2500
+    val DELAY_MAXIMUM: Long = 5000
+
     private val MAX_WAIT_TIME_MILLIS: Long = 10000 // 10 secs
     private val MAX_WAIT_TIME_REACHED: String = "Max wait time reached while waiting for mEvents."
     private val EXCEPTION_OCCURRED = "Exception occurred, please check log for stacktrace.";

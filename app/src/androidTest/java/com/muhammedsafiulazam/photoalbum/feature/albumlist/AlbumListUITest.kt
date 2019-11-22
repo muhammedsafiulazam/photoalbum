@@ -65,6 +65,7 @@ class AlbumListUITest : BaseUITest() {
     @Test
     fun loadAlbums_Offline() {
 
+        // Enable offline.
         UITestUtils.offline()
 
         // We are waiting for 2 AlbumListEventType.RESPONSE_LOAD_ALBUMS.
