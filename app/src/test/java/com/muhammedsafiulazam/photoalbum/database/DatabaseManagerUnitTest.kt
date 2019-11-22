@@ -15,7 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.test.asserter
 
-class PhotoDatabaseUnitTest {
+class DatabaseManagerUnitTest {
 
     @Before
     fun beforeTest() {
