@@ -27,7 +27,7 @@ import org.junit.runner.RunWith
  */
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class BasketUITest : BaseUITest() {
+class AlbumListUITest : BaseUITest() {
 
     @Rule @JvmField
     var mActivityTestRule: ActivityTestRule<AlbumListActivity> = ActivityTestRule(AlbumListActivity::class.java, true, false)
@@ -37,7 +37,7 @@ class BasketUITest : BaseUITest() {
     }
 
     @Test
-    fun checkSuccess_loadBooks() {
+    fun checkSuccess_loadAlbums() {
         wait(AlbumListEventType.RESPONSE_LOAD_ALBUMS, object : IBeforeWait {
             override fun beforeWait() {
                 val intent = Intent(getContext(), AlbumListActivity::class.java)
