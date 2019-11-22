@@ -38,7 +38,6 @@ class PhotoViewerActivity : BaseActivity() {
 
         mPhoto = getData() as Photo
 
-
         photoviewer_txv_title.text = getString(R.string.photoviewer_photo_title, mPhoto.id)
         photoviewer_txv_description.text = mPhoto.title?.capitalize()
 

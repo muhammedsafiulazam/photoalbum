@@ -8,9 +8,10 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/photo_imv_thumbnail"
         android:layout_width="@dimen/photolist_photo_imv_size"
-        android:layout_height="@dimen/photolist_photo_imv_size"
+        android:layout_height="wrap_content"
         android:background="@android:color/darker_gray"
         android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

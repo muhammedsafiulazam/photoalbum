@@ -3,7 +3,9 @@ package com.muhammedsafiulazam.photoalbum.feature.photolist
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
@@ -50,11 +52,12 @@ class PhotoListViewHolder(view: View, albumListListener: IPhotoListListener) : R
             Picasso.get().load(mPhoto!!.thumbnailUrl).into(mImvThumbnail, object: Callback {
                 override fun onSuccess() {
                     mPgbLoader.visibility = View.GONE
-                    mImvThumbnail.setImageResource(R.drawable.ic_cloud_off_black)
+                    mImvThumbnail.scaleType = ImageView.ScaleType.FIT_CENTER
                 }
 
                 override fun onError(e: Exception) {
                     mPgbLoader.visibility = View.GONE
+                    mImvThumbnail.scaleType = ImageView.ScaleType.CENTER
                     mImvThumbnail.setImageResource(R.drawable.ic_cloud_off_black)
                 }
             })

@@ -1,6 +1,7 @@
 package com.muhammedsafiulazam.photoalbum.feature.albumlist
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -39,18 +40,20 @@ class AlbumListViewHolder(view: View, albumListListener: IAlbumListListener) : R
     fun bind(album: Album) {
         mAlbum = album
 
-        mTxvTitle.text = mView?.context!!.getString(R.string.albumist_album_title, mAlbum!!.id)
+        mTxvTitle.text = mView.context!!.getString(R.string.albumist_album_title, mAlbum!!.id)
 
         mPgbLoader.visibility = View.VISIBLE
 
         CoroutineScope(Dispatchers.Main).launch {
-            Picasso.get().load(mAlbum!!.photos!!.first().thumbnailUrl).into(mImvThumbnail, object: Callback {
+            Picasso.get().load(mAlbum!!.thumbnailUrl).into(mImvThumbnail, object: Callback {
                 override fun onSuccess() {
                     mPgbLoader.visibility = View.GONE
+                    mImvThumbnail.scaleType = ImageView.ScaleType.FIT_CENTER
                 }
 
                 override fun onError(e: Exception) {
                     mPgbLoader.visibility = View.GONE
+                    mImvThumbnail.scaleType = ImageView.ScaleType.CENTER
                     mImvThumbnail.setImageResource(R.drawable.ic_cloud_off_black)
                 }
             })

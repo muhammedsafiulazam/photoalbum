@@ -3,6 +3,7 @@ package com.muhammedsafiulazam.photoalbum.feature.albumlist.model
 import android.os.Parcelable
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -13,4 +14,10 @@ import kotlinx.android.parcel.Parcelize
 data class Album (
     @field:Json(name = "id") val id: String,
     @field:Json(name = "photos") val photos: MutableList<Photo>
-) : Parcelable
+) : Parcelable {
+
+    @IgnoredOnParcel
+    val thumbnailUrl: String? by lazy {
+        photos.first().thumbnailUrl
+    }
+}

@@ -11,6 +11,7 @@
         android:layout_height="@dimen/albumlist_album_imv_size"
         android:background="@android:color/darker_gray"
         android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

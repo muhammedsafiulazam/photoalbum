@@ -11,8 +11,8 @@ import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        AddOnManager.initialize(this)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        AddOnManager.initialize(this)
     }
 
     override fun onTerminate() {
