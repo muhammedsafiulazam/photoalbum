@@ -104,4 +104,4 @@ workflows:
   tests_android:
     jobs:
       - tests_android_unit
-      - tests_android_ui
+      #- tests_android_ui
