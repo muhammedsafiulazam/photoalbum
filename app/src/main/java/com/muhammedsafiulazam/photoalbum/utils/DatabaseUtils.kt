@@ -1,6 +1,11 @@
 package com.muhammedsafiulazam.photoalbum.utils
 
+import android.content.Context
+import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
+import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
+import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.database.photo.PhotoDB
+import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 
 /**
@@ -8,12 +13,11 @@ import com.squareup.sqldelight.db.SqlDriver
  */
 
 object DatabaseUtils {
-    // Schema.
-    val PHOTO_DB_SCHEMA: SqlDriver.Schema = PhotoDB.Schema
-
-    // Filename.
-    val PHOTO_DB_FILENAME: String = "photo.db"
-
     // Driver.
-    var PHOTO_DB_DRIVER: SqlDriver? = null
+    var PHOTO_DB_DRIVER: SqlDriver? = AndroidSqliteDriver(PhotoDB.Schema, getContext()!!, "photo.db")
+
+    private fun getContext() : Context? {
+        val activityManager: IActivityManager = AddOnManager.getAddOn(AddOnType.ACTIVITY_MANAGER) as IActivityManager
+        return activityManager.getCurrentActivity()?.applicationContext
+    }
 }

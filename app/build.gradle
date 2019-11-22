@@ -36,12 +36,16 @@ android {
         main.res.srcDirs += 'src/main/res/launch'
         main.res.srcDirs += 'src/main/res/albumlist'
         main.res.srcDirs += 'src/main/res/photolist'
+        main.res.srcDirs += 'src/main/res/photoviewer'
     }
 
     useLibrary 'android.test.runner'
     useLibrary 'android.test.base'
     useLibrary 'android.test.mock'
 
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
 }
 
 dependencies {
@@ -115,6 +119,8 @@ dependencies {
 
     // Database
     implementation "com.squareup.sqldelight:android-driver:1.2.0"
+
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 }
 
 androidExtensions {

@@ -1,5 +1,6 @@
 package com.muhammedsafiulazam.photoalbum.feature.albumlist
 
+import android.content.Context
 import android.text.TextUtils
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivityModel
@@ -19,6 +20,8 @@ import com.muhammedsafiulazam.photoalbum.network.service.IServiceManager
  */
 
 class AlbumListActivityModel : BaseActivityModel() {
+
+    private lateinit var mContext: Context
     private lateinit var mEventManager: IEventManager
     private lateinit var mServiceManager: IServiceManager
     private lateinit var mDatabaseManager: IDatabaseManager
@@ -26,6 +29,7 @@ class AlbumListActivityModel : BaseActivityModel() {
     override fun onCreateActivity() {
         super.onCreateActivity()
 
+        mContext = getActivity() as Context
         mEventManager = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager
         mServiceManager = getAddOn(AddOnType.SERVICE_MANAGER) as IServiceManager
         mDatabaseManager = getAddOn(AddOnType.DATABASE_MANAGER) as IDatabaseManager
@@ -97,7 +101,7 @@ class AlbumListActivityModel : BaseActivityModel() {
 
             if (event.error != null) {
                 // Show message.
-                updateMessage(getActivity()?.getString(R.string.albumlist_error_load))
+                updateMessage(mContext.getString(R.string.albumlist_error_load))
             } else {
                 // Send reponse.
                 responseLoadAlbums(event.data as? List<Photo>)

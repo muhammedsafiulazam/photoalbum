@@ -1,6 +1,8 @@
 package com.muhammedsafiulazam.photoalbum.addon
 
+import android.content.Context
 import com.muhammedsafiulazam.photoalbum.activity.ActivityManager
+import com.muhammedsafiulazam.photoalbum.context.ContextManager
 import com.muhammedsafiulazam.photoalbum.database.DatabaseManager
 import com.muhammedsafiulazam.photoalbum.event.EventManager
 import com.muhammedsafiulazam.photoalbum.network.queue.QueueManager
@@ -8,44 +10,18 @@ import com.muhammedsafiulazam.photoalbum.network.retrofit.RetrofitManager
 import com.muhammedsafiulazam.photoalbum.network.server.ServerManager
 import com.muhammedsafiulazam.photoalbum.network.service.ServiceManager
 
-object AddOnManager : IAddOnManager {
+object AddOnManager : AddOn(), IAddOnManager {
 
-    private val mAddOn: IAddOn by lazy {
-        val addOn = AddOn()
-        addAddOns(addOn)
-        addOn
+    private lateinit var mContext: Context
+
+    override fun initialize(context: Context) {
+        mContext = context
+        onInitialize()
     }
 
-    override fun getAddOn(type: String): IAddOn? {
-        return mAddOn.getAddOn(type)
-    }
+    private fun onInitialize() {
 
-    override fun getAddOns(): Map<String, IAddOn> {
-        return mAddOn.getAddOns()
-    }
-
-    override fun addAddOn(type: String, addOn: IAddOn) {
-        mAddOn.addAddOn(type, addOn)
-    }
-
-    override fun addAddOns(addons: Map<String, IAddOn>) {
-        mAddOn.addAddOns(addons)
-    }
-
-    override fun removeAddOn(type: String) {
-        mAddOn.removeAddOn(type)
-    }
-
-    override fun removeAddOns(types: List<String>) {
-        mAddOn.removeAddOns(types)
-    }
-
-    override fun clearAddOns() {
-        mAddOn.clearAddOns()
-    }
-
-    private fun addAddOns(addOn: IAddOn) {
-
+        val contextManager = ContextManager(mContext)
         val activityManager = ActivityManager()
         val serverManager = ServerManager()
         val serviceManager = ServiceManager()
@@ -66,13 +42,15 @@ object AddOnManager : IAddOnManager {
 
         // Database manager.
         databaseManager.addAddOn(AddOnType.EVENT_MANAGER, eventManager)
+        databaseManager.addAddOn(AddOnType.CONTEXT_MANAGER, contextManager)
 
-        addOn.addAddOn(AddOnType.ACTIVITY_MANAGER, activityManager)
-        addOn.addAddOn(AddOnType.SERVER_MANAGER, serverManager)
-        addOn.addAddOn(AddOnType.SERVICE_MANAGER, serviceManager)
-        addOn.addAddOn(AddOnType.EVENT_MANAGER, eventManager)
-        addOn.addAddOn(AddOnType.RETROFIT_MANAGER, retrofitManager)
-        addOn.addAddOn(AddOnType.QUEUE_MANAGER, queueManager)
-        addOn.addAddOn(AddOnType.DATABASE_MANAGER, databaseManager)
+        addAddOn(AddOnType.CONTEXT_MANAGER, contextManager)
+        addAddOn(AddOnType.ACTIVITY_MANAGER, activityManager)
+        addAddOn(AddOnType.SERVER_MANAGER, serverManager)
+        addAddOn(AddOnType.SERVICE_MANAGER, serviceManager)
+        addAddOn(AddOnType.EVENT_MANAGER, eventManager)
+        addAddOn(AddOnType.RETROFIT_MANAGER, retrofitManager)
+        addAddOn(AddOnType.QUEUE_MANAGER, queueManager)
+        addAddOn(AddOnType.DATABASE_MANAGER, databaseManager)
     }
 }

@@ -13,7 +13,9 @@ import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
 import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventType
+import com.muhammedsafiulazam.photoalbum.feature.photoviewer.PhotoViewerActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
+import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import kotlinx.android.synthetic.main.activity_photolist.*
 
 
@@ -80,16 +82,20 @@ class PhotoListActivity : BaseActivity(), IPhotoListListener {
     }
 
     fun updateView(photoList: List<Photo>) {
-        this.mPhotoList.clear()
-        this.mPhotoList.addAll(photoList)
+        mPhotoList.clear()
+        mPhotoList.addAll(photoList)
 
-        this.photolist_ryv_items.post(Runnable {
+        photolist_ryv_items.post(Runnable {
             mPhotoListAdapter.notifyDataSetChanged()
         })
+
+        if (mPhotoList.isNullOrEmpty() && !ConnectivityUtils.isOnline()) {
+            updateMessage(getString(R.string.no_connectivity))
+        }
     }
 
     override fun onClickPhoto(photo: Photo) {
-        println("onClickPhoto")
+        mActivityManager.loadActivity(PhotoViewerActivity::class.java, photo)
     }
 
     private fun requestLoadPhotos() {

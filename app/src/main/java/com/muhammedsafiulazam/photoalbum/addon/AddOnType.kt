@@ -5,6 +5,7 @@ package com.muhammedsafiulazam.photoalbum.addon
  */
 
 object AddOnType {
+    const val CONTEXT_MANAGER: String = "CONTEXT_MANAGER"
     const val ACTIVITY_MANAGER: String = "ACTIVITY_MANAGER"
     const val SERVER_MANAGER: String = "SERVER_MANAGER"
     const val SERVICE_MANAGER: String = "SERVICE_MANAGER"

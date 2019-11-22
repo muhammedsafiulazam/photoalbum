@@ -3,6 +3,7 @@ package com.muhammedsafiulazam.photoalbum.feature.albumlist
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
@@ -18,14 +19,16 @@ import kotlinx.coroutines.launch
 
 class AlbumListViewHolder(view: View, albumListListener: IAlbumListListener) : RecyclerView.ViewHolder(view){
     private var mView: View
-    private var mImvCover: AppCompatImageView
+    private var mTxvTitle: AppCompatTextView
     private var mPgbLoader: ProgressBar
+    private var mImvThumbnail: AppCompatImageView
     private var mAlbum: Album? = null
 
     init {
         mView = view
-        mImvCover = view.findViewById(R.id.album_imv_thumbnail)
+        mTxvTitle = view.findViewById(R.id.album_txv_title)
         mPgbLoader = view.findViewById(R.id.album_pgb_loader)
+        mImvThumbnail = view.findViewById(R.id.album_imv_thumbnail)
         mPgbLoader.visibility = View.GONE
 
         view.setOnClickListener {
@@ -36,16 +39,19 @@ class AlbumListViewHolder(view: View, albumListListener: IAlbumListListener) : R
     fun bind(album: Album) {
         mAlbum = album
 
+        mTxvTitle.text = mView?.context!!.getString(R.string.albumist_album_title, mAlbum!!.id)
+
         mPgbLoader.visibility = View.VISIBLE
 
         CoroutineScope(Dispatchers.Main).launch {
-            Picasso.get().load(mAlbum!!.photos!!.first().thumbnailUrl).into(mImvCover, object: Callback {
+            Picasso.get().load(mAlbum!!.photos!!.first().thumbnailUrl).into(mImvThumbnail, object: Callback {
                 override fun onSuccess() {
                     mPgbLoader.visibility = View.GONE
                 }
 
                 override fun onError(e: Exception) {
                     mPgbLoader.visibility = View.GONE
+                    mImvThumbnail.setImageResource(R.drawable.ic_cloud_off_black)
                 }
             })
         }

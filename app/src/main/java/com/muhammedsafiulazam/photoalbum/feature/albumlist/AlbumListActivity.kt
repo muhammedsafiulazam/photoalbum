@@ -15,6 +15,7 @@ import com.muhammedsafiulazam.photoalbum.event.IEventManager
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.event.AlbumListEventType
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
 import com.muhammedsafiulazam.photoalbum.feature.photolist.PhotoListActivity
+import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import kotlinx.android.synthetic.main.activity_albumlist.*
 
 
@@ -81,12 +82,16 @@ class AlbumListActivity : BaseActivity(), IAlbumListListener {
     }
 
     fun updateView(albumList: List<Album>) {
-        this.mAlbumList.clear()
-        this.mAlbumList.addAll(albumList)
+        mAlbumList.clear()
+        mAlbumList.addAll(albumList)
 
-        this.albumlist_ryv_items.post(Runnable {
+        albumlist_ryv_items.post(Runnable {
             mAlbumListAdapter.notifyDataSetChanged()
         })
+
+        if (mAlbumList.isNullOrEmpty() && !ConnectivityUtils.isOnline()) {
+            updateMessage(getString(R.string.no_connectivity))
+        }
     }
 
     override fun onClickAlbum(album: Album) {

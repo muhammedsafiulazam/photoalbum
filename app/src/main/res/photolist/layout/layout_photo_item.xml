@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gdlTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/view_margin_small" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gdlBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/view_margin_small" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gdlLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/view_margin_small" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gdlRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/view_margin_small" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/photo_imv_thumbnail"
@@ -39,10 +12,9 @@
         android:background="@android:color/darker_gray"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/gdlBottom"
-        app:layout_constraintEnd_toStartOf="@+id/gdlRight"
-        app:layout_constraintStart_toStartOf="@+id/gdlLeft"
-        app:layout_constraintTop_toTopOf="@+id/gdlTop" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/photo_pgb_loader"
@@ -50,9 +22,22 @@
         android:layout_width="@dimen/photolist_photo_pgb_size"
         android:layout_height="@dimen/photolist_photo_pgb_size"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/gdlBottom"
-        app:layout_constraintEnd_toStartOf="@+id/gdlRight"
-        app:layout_constraintStart_toStartOf="@+id/gdlLeft"
-        app:layout_constraintTop_toTopOf="@+id/gdlTop" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/photo_txv_title"
+        style="@style/PhotoTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/view_margin_small"
+        android:background="@drawable/bg_round_corner"
+        android:text="@string/photolist_photo_title"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
