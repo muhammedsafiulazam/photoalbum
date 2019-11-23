@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.listener.IAlbumListListener
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
+import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
+import com.muhammedsafiulazam.photoalbum.utils.PicassoUtils
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -42,11 +44,11 @@ class AlbumListViewHolder(view: View, albumListListener: IAlbumListListener) : R
         mAlbum = album
 
         mTxvTitle.text = mView.context!!.getString(R.string.albumist_album_title, mAlbum!!.id)
-
+        mImvThumbnail.setImageDrawable(null)
         mPgbLoader.visibility = View.VISIBLE
 
-        CoroutineScope(Dispatchers.Main).launch {
-            Picasso.get().load(mAlbum!!.thumbnailUrl).into(mImvThumbnail, object: Callback {
+        CoroutineScope(CoroutineUtils.DISPATCHER_MAIN).launch {
+            PicassoUtils.getPicasso().load(mAlbum!!.thumbnailUrl).into(mImvThumbnail, object: Callback {
                 override fun onSuccess() {
                     mPgbLoader.visibility = View.GONE
                     mImvThumbnail.scaleType = ImageView.ScaleType.FIT_CENTER

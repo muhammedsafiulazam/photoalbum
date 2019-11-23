@@ -8,6 +8,8 @@ import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
+import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
+import com.muhammedsafiulazam.photoalbum.utils.PicassoUtils
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_photoviewer.*
@@ -77,20 +79,25 @@ class PhotoViewerActivity : BaseActivity() {
         // Show loader.
         updateLoader(true)
 
-        CoroutineScope(Dispatchers.Main).launch {
-            Picasso.get().load(mPhoto.url).into(photoviewer_phv_photo, object: Callback {
+        CoroutineScope(CoroutineUtils.DISPATCHER_MAIN).launch {
+            PicassoUtils.getPicasso().load(mPhoto.url).into(photoviewer_phv_photo, object: Callback {
                 override fun onSuccess() {
                     updateLoader(false)
                 }
-
                 override fun onError(e: Exception) {
+                    PicassoUtils.getPicasso().load(mPhoto.thumbnailUrl).into(photoviewer_phv_photo, object: Callback {
+                        override fun onSuccess() {
+                            updateLoader(false)
+                        }
+                        override fun onError(e: Exception) {
+                            if (!ConnectivityUtils.isOnline()) {
+                                updateMessage(getString(R.string.no_connectivity))
 
-                    if (!ConnectivityUtils.isOnline()) {
-                        updateMessage(getString(R.string.no_connectivity))
-
-                    } else {
-                        updateMessage(getString(R.string.photoviewer_error_load))
-                    }
+                            } else {
+                                updateMessage(getString(R.string.photoviewer_error_load))
+                            }
+                        }
+                    })
                 }
             })
         }
