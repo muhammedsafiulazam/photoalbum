@@ -3,6 +3,8 @@ package com.muhammedsafiulazam.photoalbum.event
 import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.core.BaseUnitTest
+import com.muhammedsafiulazam.photoalbum.database.IDatabaseManager
+import com.muhammedsafiulazam.photoalbum.database.photo.IPhotoDatabase
 import com.muhammedsafiulazam.photoalbum.network.model.Error
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -16,7 +18,7 @@ class EventManagerUnitTest : BaseUnitTest() {
     private val DUMMY_EVENT_ERROR: Error = Error(0, "")
 
     @Test
-    fun exchangeEvent() = runBlocking {
+    fun exchangeEvents() = runBlocking {
         var e: Event? = null
 
         val eventManager: IEventManager = AddOnManager.getAddOn(AddOnType.EVENT_MANAGER) as IEventManager
@@ -27,7 +29,7 @@ class EventManagerUnitTest : BaseUnitTest() {
         eventManager.send(createDummyEvent())
 
         delay(DELAY_MINIMUM)
-        asserter.assertTrue("", e != null && e!!.data != null && e!!.error != null)
+        asserter.assertTrue("exchangeEvents", e != null && e!!.data != null && e!!.error != null)
     }
 
     private fun createDummyEvent() : Event {
