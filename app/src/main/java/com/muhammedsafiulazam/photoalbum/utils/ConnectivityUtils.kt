@@ -8,6 +8,7 @@ import com.muhammedsafiulazam.photoalbum.context.IContextManager
 
 
 object ConnectivityUtils {
+    @Suppress("DEPRECATION")
     fun isOnline(): Boolean {
         val contextManager: IContextManager? = AddOnManager.getAddOn(AddOnType.CONTEXT_MANAGER) as IContextManager?
         val context: Context? = contextManager?.getContext()

@@ -18,7 +18,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        multiDexEnabled true
+        multiDexEnabled false
     }
 
     compileOptions {
@@ -91,13 +91,18 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta01'
 
     // Lifecycle
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.1.0"
+
 
     // Database
     implementation "com.squareup.sqldelight:android-driver:1.2.0"
 
     // PhotoView.
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    // Multidex.
+    implementation 'com.android.support:multidex:2.0.1'
 
     // Test libraries.
 
