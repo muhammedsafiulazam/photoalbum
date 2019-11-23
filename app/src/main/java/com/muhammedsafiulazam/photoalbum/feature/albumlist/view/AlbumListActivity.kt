@@ -1,4 +1,4 @@
-package com.muhammedsafiulazam.photoalbum.feature.albumlist
+package com.muhammedsafiulazam.photoalbum.feature.albumlist.view
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -12,9 +12,11 @@ import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
+import com.muhammedsafiulazam.photoalbum.feature.albumlist.viewmodel.AlbumListActivityModel
+import com.muhammedsafiulazam.photoalbum.feature.albumlist.listener.IAlbumListListener
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.event.AlbumListEventType
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
-import com.muhammedsafiulazam.photoalbum.feature.photolist.PhotoListActivity
+import com.muhammedsafiulazam.photoalbum.feature.photolist.view.PhotoListActivity
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import kotlinx.android.synthetic.main.activity_albumlist.*
 
@@ -23,7 +25,8 @@ import kotlinx.android.synthetic.main.activity_albumlist.*
  * Created by Muhammed Safiul Azam on 19/11/2019.
  */
 
-class AlbumListActivity : BaseActivity(), IAlbumListListener {
+class AlbumListActivity : BaseActivity(),
+    IAlbumListListener {
     private lateinit var mEventManager: IEventManager
     private lateinit var mActivityManager: IActivityManager
     private val mAlbumList: MutableList<Album> = mutableListOf()
@@ -44,7 +47,9 @@ class AlbumListActivity : BaseActivity(), IAlbumListListener {
         updateLoader(false)
 
         // Initialize recycler view.
-        val gridLayoutManager = GridLayoutManager(this, AlbumListAdapter.SPAN_SIZE)
+        val gridLayoutManager = GridLayoutManager(this,
+            AlbumListAdapter.SPAN_SIZE
+        )
         albumlist_ryv_items.setLayoutManager(gridLayoutManager)
         albumlist_ryv_items.adapter = mAlbumListAdapter
 

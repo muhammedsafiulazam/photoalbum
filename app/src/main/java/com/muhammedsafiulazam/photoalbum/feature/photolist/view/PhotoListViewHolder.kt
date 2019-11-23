@@ -1,19 +1,16 @@
-package com.muhammedsafiulazam.photoalbum.feature.photolist
+package com.muhammedsafiulazam.photoalbum.feature.photolist.view
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
+import com.muhammedsafiulazam.photoalbum.feature.photolist.listener.IPhotoListListener
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.Target
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

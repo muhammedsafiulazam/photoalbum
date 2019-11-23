@@ -1,4 +1,4 @@
-package com.muhammedsafiulazam.photoalbum.feature.albumlist
+package com.muhammedsafiulazam.photoalbum.feature.albumlist.view
 
 import android.view.View
 import android.widget.ImageView
@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
+import com.muhammedsafiulazam.photoalbum.feature.albumlist.listener.IAlbumListListener
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

@@ -20,20 +20,20 @@
 
         <uses-library android:name="android.test.runner" android:required="false" />
 
-        <activity android:name="com.muhammedsafiulazam.photoalbum.launch.LaunchActivity">
+        <activity android:name="com.muhammedsafiulazam.photoalbum.launch.view.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.muhammedsafiulazam.photoalbum.feature.albumlist.AlbumListActivity"
+        <activity android:name="com.muhammedsafiulazam.photoalbum.feature.albumlist.view.AlbumListActivity"
                 android:label="@string/albumlist_title"
                 />
-        <activity android:name="com.muhammedsafiulazam.photoalbum.feature.photolist.PhotoListActivity"
+        <activity android:name="com.muhammedsafiulazam.photoalbum.feature.photolist.view.PhotoListActivity"
             android:label="@string/photolist_title"
             />
-        <activity android:name="com.muhammedsafiulazam.photoalbum.feature.photoviewer.PhotoViewerActivity"
+        <activity android:name="com.muhammedsafiulazam.photoalbum.feature.photoviewer.view.PhotoViewerActivity"
             android:label="@string/photoviewer_title"
             android:theme="@style/ViewerTheme"
             />

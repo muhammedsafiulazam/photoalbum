@@ -1,4 +1,4 @@
-package com.muhammedsafiulazam.photoalbum.feature.albumlist
+package com.muhammedsafiulazam.photoalbum.feature.albumlist.listener
 
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
 

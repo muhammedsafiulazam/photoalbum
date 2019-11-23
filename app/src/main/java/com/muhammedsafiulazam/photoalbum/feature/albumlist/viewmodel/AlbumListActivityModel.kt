@@ -1,4 +1,4 @@
-package com.muhammedsafiulazam.photoalbum.feature.albumlist
+package com.muhammedsafiulazam.photoalbum.feature.albumlist.viewmodel
 
 import android.content.Context
 import android.text.TextUtils

@@ -1,12 +1,12 @@
-package com.muhammedsafiulazam.photoalbum.feature.photolist
+package com.muhammedsafiulazam.photoalbum.feature.photolist.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
-import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
 import androidx.recyclerview.widget.GridLayoutManager
+import com.muhammedsafiulazam.photoalbum.feature.photolist.listener.IPhotoListListener
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 
 
@@ -29,7 +29,10 @@ class PhotoListAdapter(val photoList: MutableList<Photo>, val albumListListener:
         layoutParams.height = layoutParams.width
         view.setLayoutParams(layoutParams)
 
-        return PhotoListViewHolder(view, albumListListener)
+        return PhotoListViewHolder(
+            view,
+            albumListListener
+        )
     }
 
     override fun getItemCount(): Int {
@@ -58,7 +61,8 @@ class PhotoListAdapter(val photoList: MutableList<Photo>, val albumListListener:
         }
 
         if (index >= SPAN_SIZE) {
-            marginTop = SEPARATOR_SIZE
+            marginTop =
+                SEPARATOR_SIZE
         }
 
         layoutParams.setMargins(marginLeft, marginTop, marginRight, 0)

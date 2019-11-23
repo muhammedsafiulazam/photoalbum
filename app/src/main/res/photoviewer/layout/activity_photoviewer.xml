@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/ViewerTheme"
-    tools:context=".feature.photoviewer.PhotoViewerActivity">
+    tools:context=".feature.photoviewer.view.PhotoViewerActivity">
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/photoviewer_phv_photo"

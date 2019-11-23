@@ -7,7 +7,10 @@ import com.muhammedsafiulazam.photoalbum.database.IDatabaseManager
 import com.squareup.picasso.Picasso
 import io.mockk.every
 import io.mockk.mockkObject
+import io.mockk.mockkStatic
 import io.mockk.objectMockk
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 
 object UITestUtils {
@@ -20,8 +23,8 @@ object UITestUtils {
         databaseManager.getPhotoDatabase().cleanPhotos()
     }
 
-    fun offline() {
-        mockkObject(ConnectivityUtils)
+    fun offline() = runBlocking {
+        mockkStatic(ConnectivityUtils::class)
         every { ConnectivityUtils.isOnline() } returns false
 
         val databaseManager: IDatabaseManager = AddOnManager.getAddOn(AddOnType.DATABASE_MANAGER) as IDatabaseManager

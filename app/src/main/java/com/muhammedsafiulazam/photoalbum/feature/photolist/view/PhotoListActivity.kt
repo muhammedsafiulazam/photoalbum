@@ -1,11 +1,10 @@
-package com.muhammedsafiulazam.photoalbum.feature.photolist
+package com.muhammedsafiulazam.photoalbum.feature.photolist.view
 
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.GridLayoutManager
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
@@ -13,8 +12,10 @@ import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
+import com.muhammedsafiulazam.photoalbum.feature.photolist.listener.IPhotoListListener
+import com.muhammedsafiulazam.photoalbum.feature.photolist.viewmodel.PhotoListActivityModel
 import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventType
-import com.muhammedsafiulazam.photoalbum.feature.photoviewer.PhotoViewerActivity
+import com.muhammedsafiulazam.photoalbum.feature.photoviewer.view.PhotoViewerActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import kotlinx.android.synthetic.main.activity_photolist.*
@@ -24,7 +25,8 @@ import kotlinx.android.synthetic.main.activity_photolist.*
  * Created by Muhammed Safiul Azam on 19/11/2019.
  */
 
-class PhotoListActivity : BaseActivity(), IPhotoListListener {
+class PhotoListActivity : BaseActivity(),
+    IPhotoListListener {
     private lateinit var mEventManager: IEventManager
     private lateinit var mActivityManager: IActivityManager
     private val mPhotoList: MutableList<Photo> = mutableListOf()
@@ -45,7 +47,9 @@ class PhotoListActivity : BaseActivity(), IPhotoListListener {
         updateLoader(false)
 
         // Initialize recycler view.
-        val gridLayoutManager = GridLayoutManager(this, PhotoListAdapter.SPAN_SIZE)
+        val gridLayoutManager = GridLayoutManager(this,
+            PhotoListAdapter.SPAN_SIZE
+        )
         photolist_ryv_items.setLayoutManager(gridLayoutManager)
         photolist_ryv_items.adapter = mPhotoListAdapter
 

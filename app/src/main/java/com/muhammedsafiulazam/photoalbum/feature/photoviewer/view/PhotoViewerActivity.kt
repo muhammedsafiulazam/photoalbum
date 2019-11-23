@@ -1,4 +1,4 @@
-package com.muhammedsafiulazam.photoalbum.feature.photoviewer
+package com.muhammedsafiulazam.photoalbum.feature.photoviewer.view
 
 import android.os.Bundle
 import android.view.View
@@ -6,14 +6,10 @@ import android.view.Window
 import android.view.WindowManager
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
-import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
-import com.muhammedsafiulazam.photoalbum.addon.AddOnType
-import com.muhammedsafiulazam.photoalbum.feature.albumlist.AlbumListActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_photolist.*
 import kotlinx.android.synthetic.main.activity_photoviewer.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
