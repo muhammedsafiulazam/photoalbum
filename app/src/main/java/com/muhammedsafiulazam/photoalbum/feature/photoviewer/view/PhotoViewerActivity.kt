@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
@@ -12,6 +13,7 @@ import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
 import com.muhammedsafiulazam.photoalbum.utils.PicassoUtils
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_photolist.*
 import kotlinx.android.synthetic.main.activity_photoviewer.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +23,7 @@ import kotlinx.coroutines.launch
  * Created by Muhammed Safiul Azam on 24/07/2019.
  */
 
-class PhotoViewerActivity : BaseActivity() {
+class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var mPhoto: Photo
 
@@ -36,23 +38,23 @@ class PhotoViewerActivity : BaseActivity() {
 
         mPhoto = getData() as Photo
 
+        photoviewer_srl_photo.setOnRefreshListener(this)
         photoviewer_txv_title.text = getString(R.string.photoviewer_photo_title, mPhoto.id)
-        photoviewer_txv_description.text = mPhoto.title?.capitalize()
+        photoviewer_txv_description.text = mPhoto.title
         photoviewer_phv_photo.setImageDrawable(null)
 
         photoviewer_btn_retry.setOnClickListener(View.OnClickListener {
             onClickRetry()
         })
-    }
 
-    override fun onStart() {
-        super.onStart()
+        // Load photo.
         loadPhoto()
     }
 
     private fun updateLoader(show: Boolean) {
         if (show) {
             photoviewer_pgb_loader.visibility = View.VISIBLE
+            photoviewer_phv_photo.visibility = View.GONE
             updateMessage(null)
         } else {
             photoviewer_pgb_loader.visibility = View.GONE
@@ -64,6 +66,7 @@ class PhotoViewerActivity : BaseActivity() {
             photoviewer_txv_message.text = message
             photoviewer_txv_message.visibility = View.VISIBLE
             photoviewer_btn_retry.visibility = View.VISIBLE
+            photoviewer_phv_photo.visibility = View.GONE
             updateLoader(false)
         } else {
             photoviewer_txv_message.visibility = View.GONE
@@ -75,6 +78,11 @@ class PhotoViewerActivity : BaseActivity() {
         loadPhoto()
     }
 
+    override fun onRefresh() {
+        photoviewer_srl_photo.isRefreshing = false
+        loadPhoto()
+    }
+
     private fun loadPhoto() {
         // Show loader.
         updateLoader(true)
@@ -82,11 +90,17 @@ class PhotoViewerActivity : BaseActivity() {
         CoroutineScope(CoroutineUtils.DISPATCHER_MAIN).launch {
             PicassoUtils.getPicasso().load(mPhoto.url).into(photoviewer_phv_photo, object: Callback {
                 override fun onSuccess() {
+                    photoviewer_phv_photo.visibility = View.VISIBLE
+                    // Better viewer control.
+                    photoviewer_srl_photo.isEnabled = false
                     updateLoader(false)
                 }
                 override fun onError(e: Exception) {
                     PicassoUtils.getPicasso().load(mPhoto.thumbnailUrl).into(photoviewer_phv_photo, object: Callback {
                         override fun onSuccess() {
+                            photoviewer_phv_photo.visibility = View.VISIBLE
+                            // Better viewer control.
+                            photoviewer_srl_photo.isEnabled = false
                             updateLoader(false)
                         }
                         override fun onError(e: Exception) {

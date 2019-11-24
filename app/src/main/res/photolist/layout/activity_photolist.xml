@@ -13,18 +13,18 @@
         android:layout_width="@dimen/photolist_pgb_size"
         android:layout_height="@dimen/photolist_pgb_size"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/photolist_ryv_items"
-        app:layout_constraintEnd_toEndOf="@+id/photolist_ryv_items"
-        app:layout_constraintStart_toStartOf="@+id/photolist_ryv_items"
-        app:layout_constraintTop_toTopOf="@+id/photolist_ryv_items" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.appcompat.widget.AppCompatTextView
             android:text="@string/not_available"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/photolist_txv_message"
-            app:layout_constraintBottom_toBottomOf="@+id/photolist_ryv_items"
-            app:layout_constraintTop_toTopOf="@+id/photolist_ryv_items"
-            app:layout_constraintEnd_toEndOf="@+id/photolist_ryv_items"
-            app:layout_constraintStart_toStartOf="@+id/photolist_ryv_items"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="@dimen/view_margin_small" style="@style/TextViewMessage"/>
     <Button
             android:text="@string/photolist_button_retry"
@@ -35,11 +35,22 @@
             app:layout_constraintStart_toStartOf="@+id/photolist_txv_message"
             android:layout_margin="@dimen/view_margin_small"/>
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/photolist_srl_items"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photolist_ryv_items"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="240dp"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

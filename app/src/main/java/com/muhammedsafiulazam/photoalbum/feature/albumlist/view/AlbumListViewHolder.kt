@@ -51,7 +51,7 @@ class AlbumListViewHolder(view: View, albumListListener: IAlbumListListener) : R
             PicassoUtils.getPicasso().load(mAlbum!!.thumbnailUrl).into(mImvThumbnail, object: Callback {
                 override fun onSuccess() {
                     mPgbLoader.visibility = View.GONE
-                    mImvThumbnail.scaleType = ImageView.ScaleType.FIT_CENTER
+                    mImvThumbnail.scaleType = ImageView.ScaleType.CENTER_CROP
                 }
 
                 override fun onError(e: Exception) {

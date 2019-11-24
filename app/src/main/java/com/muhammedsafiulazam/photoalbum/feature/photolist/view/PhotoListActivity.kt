@@ -6,6 +6,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
 import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_photolist.*
  */
 
 class PhotoListActivity : BaseActivity(),
-    IPhotoListListener {
+    IPhotoListListener, SwipeRefreshLayout.OnRefreshListener {
     private lateinit var mEventManager: IEventManager
     private lateinit var mActivityManager: IActivityManager
     private val mPhotoList: MutableList<Photo> = mutableListOf()
@@ -46,6 +47,8 @@ class PhotoListActivity : BaseActivity(),
         updateMessage(null)
         updateLoader(false)
 
+        photolist_srl_items.setOnRefreshListener(this)
+
         // Initialize recycler view.
         val gridLayoutManager = GridLayoutManager(this,
             PhotoListAdapter.SPAN_SIZE
@@ -58,15 +61,14 @@ class PhotoListActivity : BaseActivity(),
         })
 
         receiveEvents(true)
-    }
 
-    override fun onStart() {
-        super.onStart()
+        // Loading request.
         requestLoadPhotos()
     }
 
     fun updateLoader(show: Boolean) {
         if (show) {
+            photolist_ryv_items.visibility = GONE
             photolist_pgb_loader.visibility = VISIBLE
             updateMessage(null)
         } else {
@@ -76,6 +78,7 @@ class PhotoListActivity : BaseActivity(),
 
     fun updateMessage(message: String?) {
         if (message != null) {
+            photolist_ryv_items.visibility = GONE
             photolist_txv_message.text = message
             photolist_txv_message.visibility = VISIBLE
             photolist_btn_retry.visibility = VISIBLE
@@ -87,6 +90,10 @@ class PhotoListActivity : BaseActivity(),
     }
 
     fun updateView(photoList: List<Photo>) {
+        photolist_ryv_items.visibility = VISIBLE
+        updateLoader(false)
+        updateMessage(null)
+
         mPhotoList.clear()
         mPhotoList.addAll(photoList)
 
@@ -120,6 +127,11 @@ class PhotoListActivity : BaseActivity(),
     }
 
     private fun onClickRetry() {
+        requestLoadPhotos()
+    }
+
+    override fun onRefresh() {
+        photolist_srl_items.isRefreshing = false
         requestLoadPhotos()
     }
 

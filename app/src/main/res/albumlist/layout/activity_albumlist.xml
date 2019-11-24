@@ -13,18 +13,18 @@
         android:layout_width="@dimen/albumlist_pgb_size"
         android:layout_height="@dimen/albumlist_pgb_size"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/albumlist_ryv_items"
-        app:layout_constraintEnd_toEndOf="@+id/albumlist_ryv_items"
-        app:layout_constraintStart_toStartOf="@+id/albumlist_ryv_items"
-        app:layout_constraintTop_toTopOf="@+id/albumlist_ryv_items" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.appcompat.widget.AppCompatTextView
             android:text="@string/not_available"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/albumlist_txv_message"
-            app:layout_constraintBottom_toBottomOf="@+id/albumlist_ryv_items"
-            app:layout_constraintTop_toTopOf="@+id/albumlist_ryv_items"
-            app:layout_constraintEnd_toEndOf="@+id/albumlist_ryv_items"
-            app:layout_constraintStart_toStartOf="@+id/albumlist_ryv_items"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="@dimen/view_margin_small" style="@style/TextViewMessage"/>
     <Button
             android:text="@string/albumist_button_retry"
@@ -35,10 +35,21 @@
             app:layout_constraintStart_toStartOf="@+id/albumlist_txv_message"
             android:layout_margin="@dimen/view_margin_small"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/albumlist_srl_items"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/albumlist_ryv_items"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@ class PhotoListAdapter(val photoList: MutableList<Photo>, val albumListListener:
 
     companion object {
         const val SPAN_SIZE: Int = 3
-        private const val SEPARATOR_SIZE: Int = 10
+        private const val SEPARATOR_SIZE: Int = 8
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoListViewHolder {

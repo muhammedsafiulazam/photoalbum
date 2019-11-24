@@ -3,9 +3,9 @@ package com.muhammedsafiulazam.photoalbum.feature.albumlist.view
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
 import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
@@ -26,7 +26,8 @@ import kotlinx.android.synthetic.main.activity_albumlist.*
  */
 
 class AlbumListActivity : BaseActivity(),
-    IAlbumListListener {
+    IAlbumListListener, SwipeRefreshLayout.OnRefreshListener {
+
     private lateinit var mEventManager: IEventManager
     private lateinit var mActivityManager: IActivityManager
     private val mAlbumList: MutableList<Album> = mutableListOf()
@@ -46,6 +47,8 @@ class AlbumListActivity : BaseActivity(),
         updateMessage(null)
         updateLoader(false)
 
+        albumlist_srl_items.setOnRefreshListener(this)
+
         // Initialize recycler view.
         val gridLayoutManager = GridLayoutManager(this,
             AlbumListAdapter.SPAN_SIZE
@@ -58,15 +61,14 @@ class AlbumListActivity : BaseActivity(),
         })
 
         receiveEvents(true)
-    }
 
-    override fun onStart() {
-        super.onStart()
+        // Loading request.
         requestLoadAlbums()
     }
 
     fun updateLoader(show: Boolean) {
         if (show) {
+            albumlist_ryv_items.visibility = GONE
             albumlist_pgb_loader.visibility = VISIBLE
             updateMessage(null)
         } else {
@@ -76,6 +78,7 @@ class AlbumListActivity : BaseActivity(),
 
     fun updateMessage(message: String?) {
         if (message != null) {
+            albumlist_ryv_items.visibility = GONE
             albumlist_txv_message.text = message
             albumlist_txv_message.visibility = VISIBLE
             albumlist_btn_retry.visibility = VISIBLE
@@ -87,6 +90,10 @@ class AlbumListActivity : BaseActivity(),
     }
 
     fun updateView(albumList: List<Album>) {
+        albumlist_ryv_items.visibility = VISIBLE
+        updateLoader(false)
+        updateMessage(null)
+
         mAlbumList.clear()
         mAlbumList.addAll(albumList)
 
@@ -120,6 +127,11 @@ class AlbumListActivity : BaseActivity(),
     }
 
     private fun onClickRetry() {
+        requestLoadAlbums()
+    }
+
+    override fun onRefresh() {
+        albumlist_srl_items.isRefreshing = false
         requestLoadAlbums()
     }
 
