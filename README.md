@@ -4,10 +4,10 @@ API:
 https://static.leboncoin.fr/img/shared/technical-test.json
 
 Features:
-1. Load albums ( Swipe to refresh ).
-2. Load photos ( Swipe to refresh ).
-3. Photo viewer ( Swipe to refresh ).
-4. Database / offline.
+1. Load albums and photos.
+2. View photo with gestures.
+3. Database / offline.
+4. Swipe to fresh.
 5. Error cases.
 
 Sources:
