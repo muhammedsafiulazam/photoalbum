@@ -17,5 +17,9 @@ Sources:
 4. Events + Callbacks ( BroadcastChannel + ReceiveChannel ).
 5. UI tests + Unit tests.
 
+Configurations:
+1. CircleCI ( Unit tests ).
+2. JoCoCo ( Test coverage ).
+
 Thank you.
 
