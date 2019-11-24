@@ -13,7 +13,7 @@ Features:
 Sources:
 1. Architecture: MVVM + AddOn 
 2. Managers: Activity + Service + Server + Database + Queue + Event.
-3. Coroutine + Retrofit + RecyclerView + ConstraintLayout.
+3. Coroutine + Retrofit + RecyclerView + ConstraintLayout + SwipeRefreshLayout.
 4. Events + Callbacks ( BroadcastChannel + ReceiveChannel ).
 5. UI tests + Unit tests.
 
