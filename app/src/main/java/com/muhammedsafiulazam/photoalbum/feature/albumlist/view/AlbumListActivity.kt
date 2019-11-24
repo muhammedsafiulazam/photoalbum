@@ -77,14 +77,23 @@ class AlbumListActivity : BaseActivity(),
         }
     }
 
-    fun updateMessage(message: String?) {
+    fun updateMessage(message: Any?) {
         if (message != null) {
             albumlist_ryv_items.visibility = GONE
-            albumlist_txv_message.text = message
+
+            if (message is Int) {
+                albumlist_txv_message.text = getString(message)
+            } else if (message is String) {
+                albumlist_txv_message.text = message
+            } else {
+                albumlist_txv_message.text = ""
+            }
+
             albumlist_txv_message.visibility = VISIBLE
             albumlist_btn_retry.visibility = VISIBLE
             updateLoader(false)
         } else {
+            albumlist_txv_message.text = ""
             albumlist_txv_message.visibility = GONE
             albumlist_btn_retry.visibility = GONE
         }
@@ -124,7 +133,7 @@ class AlbumListActivity : BaseActivity(),
         if (TextUtils.equals(AlbumListEventType.UPDATE_LOADER, event.type)) {
             updateLoader(event.data as Boolean)
         } else if (TextUtils.equals(AlbumListEventType.UPDATE_MESSAGE, event.type)) {
-            updateMessage(event.data as String)
+            updateMessage(event.data)
         } else if (TextUtils.equals(AlbumListEventType.RESPONSE_LOAD_ALBUMS, event.type)) {
             val albumList: List<Album>? = event.data as List<Album>?
             updateView(albumList)

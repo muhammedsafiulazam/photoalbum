@@ -76,14 +76,23 @@ class PhotoListActivity : BaseActivity(),
         }
     }
 
-    fun updateMessage(message: String?) {
+    fun updateMessage(message: Any?) {
         if (message != null) {
             photolist_ryv_items.visibility = GONE
-            photolist_txv_message.text = message
+
+            if (message is Int) {
+                photolist_txv_message.text = getString(message)
+            } else if (message is String) {
+                photolist_txv_message.text = message
+            } else {
+                photolist_txv_message.text = ""
+            }
+
             photolist_txv_message.visibility = VISIBLE
             photolist_btn_retry.visibility = VISIBLE
             updateLoader(false)
         } else {
+            photolist_txv_message.text = ""
             photolist_txv_message.visibility = GONE
             photolist_btn_retry.visibility = GONE
         }
@@ -118,11 +127,12 @@ class PhotoListActivity : BaseActivity(),
         mEventManager.send(event)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onReceiveEvents(event: Event) {
         if (TextUtils.equals(PhotoListEventType.UPDATE_LOADER, event.type)) {
             updateLoader(event.data as Boolean)
         } else if (TextUtils.equals(PhotoListEventType.UPDATE_MESSAGE, event.type)) {
-            updateMessage(event.data as String)
+            updateMessage(event.data)
         } else if (TextUtils.equals(PhotoListEventType.RESPONSE_LOAD_PHOTOS, event.type)) {
             val photoList: List<Photo>? = event.data as List<Photo>?
             updateView(photoList)

@@ -21,7 +21,6 @@ import com.muhammedsafiulazam.photoalbum.network.service.photo.event.PhotoServic
 
 class AlbumListActivityModel : BaseActivityModel() {
 
-    private lateinit var mContext: Context
     private lateinit var mEventManager: IEventManager
     private lateinit var mServiceManager: IServiceManager
     private lateinit var mDatabaseManager: IDatabaseManager
@@ -29,7 +28,6 @@ class AlbumListActivityModel : BaseActivityModel() {
     override fun onCreateActivity() {
         super.onCreateActivity()
 
-        mContext = getActivity() as Context
         mEventManager = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager
         mServiceManager = getAddOn(AddOnType.SERVICE_MANAGER) as IServiceManager
         mDatabaseManager = getAddOn(AddOnType.DATABASE_MANAGER) as IDatabaseManager
@@ -42,7 +40,7 @@ class AlbumListActivityModel : BaseActivityModel() {
         mEventManager.send(event)
     }
 
-    private fun updateMessage(error: String?) {
+    private fun updateMessage(error: Any?) {
         val event = Event(AlbumListEventType.UPDATE_MESSAGE, error, null)
         mEventManager.send(event)
     }
@@ -102,7 +100,7 @@ class AlbumListActivityModel : BaseActivityModel() {
 
             if (event.error != null) {
                 // Show message.
-                updateMessage(mContext.getString(R.string.albumlist_error_load))
+                updateMessage(R.string.albumlist_error_load)
             } else {
                 // Send reponse.
                 responseLoadAlbums(event.data as List<Photo>?)
