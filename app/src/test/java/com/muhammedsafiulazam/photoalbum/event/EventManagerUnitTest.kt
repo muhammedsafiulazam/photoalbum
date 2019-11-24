@@ -3,8 +3,6 @@ package com.muhammedsafiulazam.photoalbum.event
 import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.core.BaseUnitTest
-import com.muhammedsafiulazam.photoalbum.database.IDatabaseManager
-import com.muhammedsafiulazam.photoalbum.database.photo.IPhotoDatabase
 import com.muhammedsafiulazam.photoalbum.network.model.Error
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

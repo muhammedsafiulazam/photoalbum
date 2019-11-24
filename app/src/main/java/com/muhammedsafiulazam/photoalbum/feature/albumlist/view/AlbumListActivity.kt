@@ -3,7 +3,8 @@ package com.muhammedsafiulazam.photoalbum.feature.albumlist.view
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
@@ -12,10 +13,10 @@ import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
-import com.muhammedsafiulazam.photoalbum.feature.albumlist.viewmodel.AlbumListActivityModel
-import com.muhammedsafiulazam.photoalbum.feature.albumlist.listener.IAlbumListListener
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.event.AlbumListEventType
+import com.muhammedsafiulazam.photoalbum.feature.albumlist.listener.IAlbumListListener
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
+import com.muhammedsafiulazam.photoalbum.feature.albumlist.viewmodel.AlbumListActivityModel
 import com.muhammedsafiulazam.photoalbum.feature.photolist.view.PhotoListActivity
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import kotlinx.android.synthetic.main.activity_albumlist.*

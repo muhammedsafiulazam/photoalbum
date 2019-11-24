@@ -18,7 +18,8 @@ import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventT
 import com.muhammedsafiulazam.photoalbum.feature.photolist.view.PhotoListActivity
 import com.muhammedsafiulazam.photoalbum.utils.RecyclerViewAssertion.withItemCount
 import com.tyro.oss.arbitrater.arbitraryInstance
-import org.hamcrest.Matchers.*
+import org.hamcrest.Matchers.greaterThan
+import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

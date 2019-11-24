@@ -12,11 +12,8 @@ import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
 import com.muhammedsafiulazam.photoalbum.utils.PicassoUtils
 import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_photolist.*
 import kotlinx.android.synthetic.main.activity_photoviewer.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**

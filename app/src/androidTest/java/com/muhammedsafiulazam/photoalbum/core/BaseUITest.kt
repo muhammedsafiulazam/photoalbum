@@ -11,12 +11,9 @@ import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
-import com.muhammedsafiulazam.photoalbum.utils.UITestUtils
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.channels.ReceiveChannel
-import org.junit.After
 import org.junit.Assert
-import org.junit.Before
 import java.util.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit

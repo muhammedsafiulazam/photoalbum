@@ -13,9 +13,9 @@ import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
+import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventType
 import com.muhammedsafiulazam.photoalbum.feature.photolist.listener.IPhotoListListener
 import com.muhammedsafiulazam.photoalbum.feature.photolist.viewmodel.PhotoListActivityModel
-import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventType
 import com.muhammedsafiulazam.photoalbum.feature.photoviewer.view.PhotoViewerActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils

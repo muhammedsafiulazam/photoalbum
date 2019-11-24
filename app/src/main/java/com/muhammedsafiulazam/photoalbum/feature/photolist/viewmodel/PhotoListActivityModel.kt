@@ -6,10 +6,8 @@ import com.muhammedsafiulazam.photoalbum.activity.BaseActivityModel
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
-import com.muhammedsafiulazam.photoalbum.feature.albumlist.event.AlbumListEventType
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
 import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventType
-import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.network.service.IServiceManager
 
 /**

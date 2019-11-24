@@ -11,9 +11,9 @@ import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.event.AlbumListEventType
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
-import com.muhammedsafiulazam.photoalbum.network.service.photo.event.PhotoServiceEventType
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.network.service.IServiceManager
+import com.muhammedsafiulazam.photoalbum.network.service.photo.event.PhotoServiceEventType
 
 /**
  * Created by Muhammed Safiul Azam on 19/11/2019.

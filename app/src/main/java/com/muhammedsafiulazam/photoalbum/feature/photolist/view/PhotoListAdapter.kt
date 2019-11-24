@@ -3,9 +3,9 @@ package com.muhammedsafiulazam.photoalbum.feature.photolist.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
-import androidx.recyclerview.widget.GridLayoutManager
 import com.muhammedsafiulazam.photoalbum.feature.photolist.listener.IPhotoListListener
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 

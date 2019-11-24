@@ -4,11 +4,11 @@ import com.muhammedsafiulazam.photoalbum.addon.AddOn
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
-import com.muhammedsafiulazam.photoalbum.network.service.photo.event.PhotoServiceEventType
 import com.muhammedsafiulazam.photoalbum.network.model.Error
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.network.queue.IQueueManager
 import com.muhammedsafiulazam.photoalbum.network.server.IServerManager
+import com.muhammedsafiulazam.photoalbum.network.service.photo.event.PhotoServiceEventType
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import com.muhammedsafiulazam.photoalbum.utils.ErrorUtils
 import retrofit2.Call

@@ -2,7 +2,6 @@ package com.muhammedsafiulazam.photoalbum.feature.albumlist
 
 import android.content.Intent
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -16,12 +15,11 @@ import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.event.AlbumListEventType
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.view.AlbumListActivity
 import com.muhammedsafiulazam.photoalbum.utils.RecyclerViewAssertion.withItemCount
-import com.muhammedsafiulazam.photoalbum.utils.UITestUtils
-import org.hamcrest.Matchers.*
+import org.hamcrest.Matchers.greaterThan
+import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.*
 
 /**
  * Created by Muhammed Safiul Azam on 23/11/2019.

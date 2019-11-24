@@ -1,12 +1,6 @@
 package com.muhammedsafiulazam.photoalbum.network.queue
 
 import com.muhammedsafiulazam.photoalbum.addon.AddOn
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.channels.ticker
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 import java.util.concurrent.ExecutorService

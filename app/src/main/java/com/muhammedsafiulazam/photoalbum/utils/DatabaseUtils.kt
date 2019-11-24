@@ -1,7 +1,6 @@
 package com.muhammedsafiulazam.photoalbum.utils
 
 import android.content.Context
-import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.context.IContextManager

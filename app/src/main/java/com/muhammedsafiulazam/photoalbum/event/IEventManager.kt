@@ -2,7 +2,6 @@ package com.muhammedsafiulazam.photoalbum.event
 
 import com.muhammedsafiulazam.photoalbum.addon.IAddOn
 import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlin.coroutines.CoroutineContext
 

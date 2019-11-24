@@ -6,7 +6,9 @@ import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.database.IDatabaseManager
 import com.muhammedsafiulazam.photoalbum.database.photo.PhotoDB
 import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
-import io.mockk.*
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.mockkObject
 
 object UnitTestUtils {
 

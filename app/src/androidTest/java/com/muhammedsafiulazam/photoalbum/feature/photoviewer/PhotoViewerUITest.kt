@@ -13,10 +13,9 @@ import com.muhammedsafiulazam.photoalbum.core.BaseUITest
 import com.muhammedsafiulazam.photoalbum.feature.photoviewer.view.PhotoViewerActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.utils.ImageViewMatcher
-import com.muhammedsafiulazam.photoalbum.utils.UITestUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.hamcrest.Matchers.*
+import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

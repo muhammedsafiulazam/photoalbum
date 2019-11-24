@@ -3,11 +3,11 @@ package com.muhammedsafiulazam.photoalbum.feature.albumlist.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
-import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
-import androidx.recyclerview.widget.GridLayoutManager
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.listener.IAlbumListListener
+import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
 
 
 /**

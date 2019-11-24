@@ -1,6 +1,5 @@
 package com.muhammedsafiulazam.photoalbum.feature.photolist.listener
 
-import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 
 /**
