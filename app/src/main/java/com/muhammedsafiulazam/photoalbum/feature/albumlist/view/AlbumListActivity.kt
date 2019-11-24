@@ -90,13 +90,16 @@ class AlbumListActivity : BaseActivity(),
         }
     }
 
-    fun updateView(albumList: List<Album>) {
+    fun updateView(albumList: List<Album>?) {
         albumlist_ryv_items.visibility = VISIBLE
         updateLoader(false)
         updateMessage(null)
 
         mAlbumList.clear()
-        mAlbumList.addAll(albumList)
+
+        if (albumList != null) {
+            mAlbumList.addAll(albumList)
+        }
 
         albumlist_ryv_items.post(Runnable {
             mAlbumListAdapter.notifyDataSetChanged()
@@ -116,13 +119,14 @@ class AlbumListActivity : BaseActivity(),
         mEventManager.send(event)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onReceiveEvents(event: Event) {
         if (TextUtils.equals(AlbumListEventType.UPDATE_LOADER, event.type)) {
             updateLoader(event.data as Boolean)
         } else if (TextUtils.equals(AlbumListEventType.UPDATE_MESSAGE, event.type)) {
             updateMessage(event.data as String)
         } else if (TextUtils.equals(AlbumListEventType.RESPONSE_LOAD_ALBUMS, event.type)) {
-            val albumList: List<Album> = event.data as List<Album>
+            val albumList: List<Album>? = event.data as List<Album>?
             updateView(albumList)
         }
     }

@@ -13,9 +13,9 @@ import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
-import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventType
 import com.muhammedsafiulazam.photoalbum.feature.photolist.listener.IPhotoListListener
 import com.muhammedsafiulazam.photoalbum.feature.photolist.viewmodel.PhotoListActivityModel
+import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventType
 import com.muhammedsafiulazam.photoalbum.feature.photoviewer.view.PhotoViewerActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
@@ -89,13 +89,16 @@ class PhotoListActivity : BaseActivity(),
         }
     }
 
-    fun updateView(photoList: List<Photo>) {
+    fun updateView(photoList: List<Photo>?) {
         photolist_ryv_items.visibility = VISIBLE
         updateLoader(false)
         updateMessage(null)
 
         mPhotoList.clear()
-        mPhotoList.addAll(photoList)
+
+        if (photoList != null) {
+            mPhotoList.addAll(photoList)
+        }
 
         photolist_ryv_items.post(Runnable {
             mPhotoListAdapter.notifyDataSetChanged()
@@ -121,7 +124,7 @@ class PhotoListActivity : BaseActivity(),
         } else if (TextUtils.equals(PhotoListEventType.UPDATE_MESSAGE, event.type)) {
             updateMessage(event.data as String)
         } else if (TextUtils.equals(PhotoListEventType.RESPONSE_LOAD_PHOTOS, event.type)) {
-            val photoList: List<Photo> = event.data as List<Photo>
+            val photoList: List<Photo>? = event.data as List<Photo>?
             updateView(photoList)
         }
     }

@@ -71,6 +71,7 @@ class AlbumListActivityModel : BaseActivityModel() {
         mEventManager.send(event)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onReceiveEvents(event: Event) {
         if (TextUtils.equals(AlbumListEventType.REQUEST_LOAD_ALBUMS, event.type)) {
             requestLoadAlbums()
@@ -85,7 +86,7 @@ class AlbumListActivityModel : BaseActivityModel() {
                 // Load from database.
                 mDatabaseManager.getPhotoDatabase().getPhotos()
             } else {
-                val photoList: List<Photo>? = event.data as? List<Photo>
+                val photoList: List<Photo>? = event.data as List<Photo>?
 
                 // Save in database.
                 if (!photoList.isNullOrEmpty()) {
@@ -104,7 +105,7 @@ class AlbumListActivityModel : BaseActivityModel() {
                 updateMessage(mContext.getString(R.string.albumlist_error_load))
             } else {
                 // Send reponse.
-                responseLoadAlbums(event.data as? List<Photo>)
+                responseLoadAlbums(event.data as List<Photo>?)
             }
         }
     }
