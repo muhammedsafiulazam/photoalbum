@@ -1,6 +1,7 @@
 package com.muhammedsafiulazam.photoalbum.feature.photolist
 
 import android.content.Intent
+import android.os.Build
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -16,13 +17,16 @@ import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
 import com.muhammedsafiulazam.photoalbum.feature.photolist.event.PhotoListEventType
 import com.muhammedsafiulazam.photoalbum.feature.photolist.view.PhotoListActivity
+import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.utils.RecyclerViewAssertion.withItemCount
+import com.muhammedsafiulazam.photoalbum.utils.UIDummyUtils
 import com.tyro.oss.arbitrater.arbitraryInstance
 import org.hamcrest.Matchers.greaterThan
 import org.hamcrest.Matchers.not
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.*
 
 /**
  * Created by Muhammed Safiul Azam on 23/11/2019.
@@ -42,7 +46,7 @@ class PhotoListUITest : BaseUITest() {
         wait(PhotoListEventType.RESPONSE_LOAD_PHOTOS, object : IBeforeWait {
             override fun beforeWait() {
                 val intent = Intent(getContext(), PhotoListActivity::class.java)
-                intent.putExtra(BaseActivity.KEY_DATA, createDummyAlbum())
+                intent.putExtra(BaseActivity.KEY_DATA, UIDummyUtils.createDummyAlbum())
                 mActivityTestRule.launchActivity(intent)
             }
 
@@ -54,9 +58,5 @@ class PhotoListUITest : BaseUITest() {
                 onView(withId(R.id.photolist_btn_retry)).check(matches(not(isDisplayed())))
             }
         })
-    }
-
-    private fun createDummyAlbum() : Album {
-        return Album::class.arbitraryInstance()
     }
 }

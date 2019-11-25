@@ -7,8 +7,7 @@ import com.muhammedsafiulazam.photoalbum.database.IDatabaseManager
 import com.muhammedsafiulazam.photoalbum.database.photo.event.PhotoDatabaseEventType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
-import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
-import com.tyro.oss.arbitrater.arbitraryInstance
+import com.muhammedsafiulazam.photoalbum.utils.UnitDummyUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -34,7 +33,7 @@ class PhotoDatabaseUnitTest : BaseUnitTest() {
             }
         })
 
-        databaseManager.getPhotoDatabase().savePhotos(createDummyPhotos())
+        databaseManager.getPhotoDatabase().savePhotos(UnitDummyUtils.createDummyPhotos())
 
         delay(DELAY_MINIMUM)
         asserter.assertTrue("getPhotos", e != null && e!!.data != null && e!!.error == null)
@@ -56,7 +55,7 @@ class PhotoDatabaseUnitTest : BaseUnitTest() {
             }
         })
 
-        databaseManager.getPhotoDatabase().savePhotos(createDummyPhotos())
+        databaseManager.getPhotoDatabase().savePhotos(UnitDummyUtils.createDummyPhotos())
 
         delay(DELAY_MINIMUM)
         asserter.assertTrue("savePhotos", e != null && e!!.data != null && e!!.error == null)
@@ -80,17 +79,9 @@ class PhotoDatabaseUnitTest : BaseUnitTest() {
             }
         })
 
-        databaseManager.getPhotoDatabase().savePhotos(createDummyPhotos())
+        databaseManager.getPhotoDatabase().savePhotos(UnitDummyUtils.createDummyPhotos())
 
         delay(DELAY_MINIMUM)
         asserter.assertTrue("cleanPhotos", e != null && e!!.data == null && e!!.error == null)
-    }
-
-    private fun createDummyPhotos() : List<Photo> {
-        val photos: MutableList<Photo> = mutableListOf()
-        for(i in 0..5) {
-            photos.add(i, Photo::class.arbitraryInstance())
-        }
-        return photos
     }
 }
