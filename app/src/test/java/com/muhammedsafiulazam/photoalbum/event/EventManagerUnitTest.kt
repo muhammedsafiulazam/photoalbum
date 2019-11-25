@@ -16,6 +16,9 @@ class EventManagerUnitTest : BaseUnitTest() {
     private val DUMMY_EVENT_ERROR: Error = Error(0, "")
 
     @Test
+    /**
+     * Exchange events.
+     */
     fun exchangeEvents() = runBlocking {
         var e: Event? = null
 

@@ -35,6 +35,9 @@ class PhotoListUITest : BaseUITest() {
         PhotoListActivity::class.java, true, false)
 
     @Test
+    /**
+     * Load photos.
+     */
     fun loadPhotos() {
         wait(PhotoListEventType.RESPONSE_LOAD_PHOTOS, object : IBeforeWait {
             override fun beforeWait() {

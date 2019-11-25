@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="error_code_no_connectivity">503</integer>
+</resources>

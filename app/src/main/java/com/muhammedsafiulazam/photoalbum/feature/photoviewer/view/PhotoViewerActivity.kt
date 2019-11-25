@@ -102,7 +102,7 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
                         }
                         override fun onError(e: Exception) {
                             if (!ConnectivityUtils.isOnline()) {
-                                updateMessage(getString(R.string.no_connectivity))
+                                updateMessage(getString(R.string.photoviewer_no_connectivity))
 
                             } else {
                                 updateMessage(getString(R.string.photoviewer_error_load))

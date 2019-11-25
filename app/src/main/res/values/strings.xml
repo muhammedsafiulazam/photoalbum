@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Photo Album</string>
     <string name="not_available">n/a</string>
-    <string name="no_connectivity">Sorry! No connectivity.</string>
+    <string name="error_body_no_connectivity">No connectivity.</string>
 </resources>

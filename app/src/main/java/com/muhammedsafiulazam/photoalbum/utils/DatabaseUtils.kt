@@ -13,6 +13,7 @@ import com.squareup.sqldelight.db.SqlDriver
  */
 
 object DatabaseUtils {
+    // Photo database driver.
     val PHOTO_DB_DRIVER: SqlDriver by lazy {
         val contextManager: IContextManager? = AddOnManager.getAddOn(AddOnType.CONTEXT_MANAGER) as IContextManager?
         val context: Context? = contextManager?.getContext()

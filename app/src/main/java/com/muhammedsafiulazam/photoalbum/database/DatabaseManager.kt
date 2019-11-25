@@ -13,6 +13,10 @@ class DatabaseManager : AddOn(), IDatabaseManager {
         photoDatabase
     }
 
+    /**
+     * Get photo database.
+     * @return photo database
+     */
     override fun getPhotoDatabase(): IPhotoDatabase {
         return mPhotoDatabase
     }

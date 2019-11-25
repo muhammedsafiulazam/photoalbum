@@ -20,7 +20,7 @@ import retrofit2.Response
 
 class PhotoService : AddOn(), IPhotoService {
     /**
-     * Get photos.
+     * Get photos asynchronous.
      */
     override fun getPhotos() {
         // Server manager.

@@ -16,6 +16,9 @@ import kotlin.test.asserter
 class PhotoServiceUnitTest : BaseUnitTest() {
 
     @Test
+    /**
+     * Get photos online.
+     */
     fun getPhotos_Online() = runBlocking {
         var e: Event? = null
 
@@ -35,6 +38,9 @@ class PhotoServiceUnitTest : BaseUnitTest() {
     }
 
     @Test
+    /**
+     * Get photos offline.
+     */
     fun getPhotos_Offline() = runBlocking {
         // Enable offline.
         UnitTestUtils.offline()

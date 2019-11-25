@@ -3,4 +3,5 @@
     <string name="photoviewer_error_load">Sorry! Failed to load photo.</string>
     <string name="photoviewer_button_retry">Retry</string>
     <string name="photoviewer_photo_title">Photo: %s</string>
+    <string name="photoviewer_no_connectivity">Sorry! No connectivity.</string>
 </resources>

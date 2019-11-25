@@ -114,7 +114,7 @@ class PhotoListActivity : BaseActivity(),
         })
 
         if (mPhotoList.isNullOrEmpty() && !ConnectivityUtils.isOnline()) {
-            updateMessage(getString(R.string.no_connectivity))
+            updateMessage(getString(R.string.photolist_no_connectivity))
         }
     }
 

@@ -19,10 +19,18 @@ open class BaseActivityModel : ViewModel(), IAddOn {
     private var mActivity: BaseActivity? = null
     private val mAddOn: AddOn = AddOn()
 
+    /**
+     * Get associated activity.
+     * @return associated activity
+     */
     fun getActivity() : BaseActivity? {
         return mActivity
     }
 
+    /**
+     * Set associated activity.
+     * @param associated activity
+     */
     fun setActivity(activity: BaseActivity?) {
         mActivity = activity
     }
@@ -53,8 +61,10 @@ open class BaseActivityModel : ViewModel(), IAddOn {
         receiveEvents(false)
     }
 
-    // Events related methods.
-
+    /**
+     * Enable / disable receiving events
+     * @param receive enable/disable flag.
+     */
     fun receiveEvents(receive: Boolean) {
         val eventManager: IEventManager? = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager?
 
@@ -70,6 +80,10 @@ open class BaseActivityModel : ViewModel(), IAddOn {
         }
     }
 
+    /**
+     * Receive events (callback).
+     * @param event received event
+     */
     open fun onReceiveEvents(event: Event) {
     }
 

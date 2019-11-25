@@ -35,6 +35,9 @@ class PhotoViewerUITest : BaseUITest() {
         PhotoViewerActivity::class.java, true, false)
 
     @Test
+    /**
+     * Load photo.
+     */
     fun loadPhoto() {
         val intent = Intent(getContext(), PhotoViewerActivity::class.java)
         intent.putExtra(BaseActivity.KEY_DATA, createDummyPhoto())

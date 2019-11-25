@@ -17,6 +17,9 @@ import kotlin.test.asserter
 class PhotoDatabaseUnitTest : BaseUnitTest() {
 
     @Test
+    /**
+     * Get photos.
+     */
     fun getPhotos() = runBlocking {
         var e: Event? = null
 
@@ -38,6 +41,9 @@ class PhotoDatabaseUnitTest : BaseUnitTest() {
     }
 
     @Test
+    /**
+     * Save photos.
+     */
     fun savePhotos() = runBlocking {
         var e: Event? = null
 
@@ -57,6 +63,9 @@ class PhotoDatabaseUnitTest : BaseUnitTest() {
     }
 
     @Test
+    /**
+     * Clean photos.
+     */
     fun cleanPhotos() = runBlocking {
         var e: Event? = null
 

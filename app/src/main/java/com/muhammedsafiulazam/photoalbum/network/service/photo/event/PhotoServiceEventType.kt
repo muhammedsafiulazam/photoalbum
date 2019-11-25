@@ -6,8 +6,8 @@ package com.muhammedsafiulazam.photoalbum.network.service.photo.event
 
 object PhotoServiceEventType {
     // Tag.
-    const val TAG: String = "PHOTO_SERVICE_EVENT_TYPE_"
+    private const val TAG: String = "PHOTO_SERVICE_EVENT_TYPE_"
 
-    // Photo event types.
+    // Types.
     const val GET_PHOTOS: String = TAG + "GET_PHOTOS"
 }

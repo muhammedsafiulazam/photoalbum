@@ -17,8 +17,8 @@ class ServiceManager : AddOn(), IServiceManager {
     }
 
     /**
-     * Get book service.
-     * @return book service
+     * Get photo service.
+     * @return photo service
      */
     override fun getPhotoService(): IPhotoService {
         return mPhotoService

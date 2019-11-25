@@ -1,6 +1,7 @@
 package com.muhammedsafiulazam.photoalbum.utils
 
 import android.content.Context
+import android.content.res.Resources
 import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.database.IDatabaseManager
@@ -13,7 +14,13 @@ import io.mockk.mockkObject
 object UnitTestUtils {
 
     fun setup() {
-        AddOnManager.initialize(mockk<Context>())
+
+        val context: Context = mockk<Context>()
+        every { context.resources } returns mockk<Resources>()
+        // TODO - Quick Solution.
+        every { context.resources.getString(any()) } returns ""
+        every { context.resources.getInteger(any()) } returns 0
+        AddOnManager.initialize(context)
 
         mockkObject(CoroutineUtils)
         every { CoroutineUtils.DISPATCHER_MAIN } returns CoroutineUtils.DISPATCHER_IO

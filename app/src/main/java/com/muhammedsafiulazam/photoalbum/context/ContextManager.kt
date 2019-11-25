@@ -11,6 +11,10 @@ class ContextManager(context: Context) : AddOn(), IContextManager {
         mContext = context
     }
 
+    /**
+     * Get context.
+     * @param context context
+     */
     override fun getContext() : Context {
         return mContext
     }

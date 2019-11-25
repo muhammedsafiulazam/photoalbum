@@ -67,14 +67,26 @@ open class BaseActivity : AppCompatActivity(), IAddOn {
         super.onStop()
     }
 
+    /**
+     * Get associated data.
+     * @return associated data
+     */
     fun getData() : Parcelable? {
         return intent?.getParcelableExtra(KEY_DATA)
     }
 
+    /**
+     * Get associated activity model.
+     * @return associated activity model
+     */
     fun getActivityModel() : BaseActivityModel? {
         return mActivityModel
     }
 
+    /**
+     * Set associated activity model.
+     * @param activityModel associated activity model
+     */
     fun setActivityModel(activityModel: Class<out BaseActivityModel>) {
         mActivityModel = ViewModelProviders.of(this).get(activityModel)
         mActivityModel?.setActivity(this)
@@ -97,8 +109,10 @@ open class BaseActivity : AppCompatActivity(), IAddOn {
         super.onDestroy()
     }
 
-    // Events related methods.
-
+    /**
+     * Enable / disable receiving events
+     * @param receive enable/disable flag.
+     */
     fun receiveEvents(receive: Boolean) {
         val eventManager: IEventManager? = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager?
 
@@ -114,6 +128,10 @@ open class BaseActivity : AppCompatActivity(), IAddOn {
         }
     }
 
+    /**
+     * Receive events (callback).
+     * @param event received event
+     */
     open fun onReceiveEvents(event: Event) {
     }
 

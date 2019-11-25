@@ -8,7 +8,7 @@ import com.muhammedsafiulazam.photoalbum.addon.IAddOn
 
 interface IPhotoService : IAddOn {
     /**
-     * Get photos.
+     * Get photos asynchronously.
      */
     fun getPhotos()
 }

@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 
 class PhotoDatabase(val db: PhotoDB) : AddOn(), IPhotoDatabase {
 
+    /**
+     * Get photos asynchronously.
+     */
     override fun getPhotos() {
         GlobalScope.launch(CoroutineUtils.DISPATCHER_IO) {
             var photos: ArrayList<Photo> = arrayListOf()
@@ -36,6 +39,10 @@ class PhotoDatabase(val db: PhotoDB) : AddOn(), IPhotoDatabase {
         }
     }
 
+    /**
+     * Save photos asynchronously.
+     * @param photos list of photo
+     */
     override fun savePhotos(photos: List<Photo>) {
         GlobalScope.launch(CoroutineUtils.DISPATCHER_IO) {
             photos.forEach { photo ->
@@ -54,6 +61,9 @@ class PhotoDatabase(val db: PhotoDB) : AddOn(), IPhotoDatabase {
         }
     }
 
+    /**
+     * Clean photos asynchronously.
+     */
     override fun cleanPhotos() {
         GlobalScope.launch(CoroutineUtils.DISPATCHER_IO) {
             db.photoTableQueries.deleteAll()

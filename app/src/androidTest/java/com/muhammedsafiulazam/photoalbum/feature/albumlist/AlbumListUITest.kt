@@ -33,6 +33,9 @@ class AlbumListUITest : BaseUITest() {
         AlbumListActivity::class.java, true, false)
 
     @Test
+    /**
+     * Load albums.
+     */
     fun loadAlbums() {
         wait(AlbumListEventType.RESPONSE_LOAD_ALBUMS, object : IBeforeWait {
             override fun beforeWait() {

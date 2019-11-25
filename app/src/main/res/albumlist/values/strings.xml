@@ -3,4 +3,5 @@
     <string name="albumlist_error_load">Sorry! Failed to load albums.</string>
     <string name="albumist_button_retry">Retry</string>
     <string name="albumist_album_title">Album: %s</string>
+    <string name="albumlist_no_connectivity">Sorry! No connectivity.</string>
 </resources>

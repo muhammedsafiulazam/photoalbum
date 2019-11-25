@@ -10,6 +10,9 @@ import kotlin.test.asserter
 class DatabaseManagerUnitTest : BaseUnitTest() {
 
     @Test
+    /**
+     * Access photo database.
+     */
     fun accessPhotoDatabase() {
         val databaseManager: IDatabaseManager = AddOnManager.getAddOn(AddOnType.DATABASE_MANAGER) as IDatabaseManager
         val photoDatabase: IPhotoDatabase? = databaseManager.getPhotoDatabase()

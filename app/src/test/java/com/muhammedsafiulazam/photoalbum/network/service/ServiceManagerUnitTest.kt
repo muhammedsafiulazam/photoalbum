@@ -10,6 +10,9 @@ import kotlin.test.asserter
 class ServiceManagerUnitTest : BaseUnitTest() {
 
     @Test
+    /**
+     * Access photo service.
+     */
     fun accessPhotoService() {
         val serviceManager: IServiceManager = AddOnManager.getAddOn(AddOnType.SERVICE_MANAGER) as IServiceManager
         val photoService: IPhotoService? = serviceManager.getPhotoService()

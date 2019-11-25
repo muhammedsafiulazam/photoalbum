@@ -115,7 +115,7 @@ class AlbumListActivity : BaseActivity(),
         })
 
         if (mAlbumList.isNullOrEmpty() && !ConnectivityUtils.isOnline()) {
-            updateMessage(getString(R.string.no_connectivity))
+            updateMessage(getString(R.string.albumlist_no_connectivity))
         }
     }
 

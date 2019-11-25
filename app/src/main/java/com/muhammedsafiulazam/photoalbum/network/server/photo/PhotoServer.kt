@@ -9,15 +9,15 @@ import com.muhammedsafiulazam.photoalbum.network.retrofit.IRetrofitManager
  */
 
 class PhotoServer : AddOn(), IPhotoServer {
-    // Book calls.
+    // Photo calls.
     private val mPhotoCall : IPhotoCall by lazy {
         val retrofitManager: IRetrofitManager = getAddOn(AddOnType.RETROFIT_MANAGER) as IRetrofitManager
         retrofitManager.getRetrofit().create(IPhotoCall::class.java)
     }
 
     /**
-     * Get repository calls.
-     * @return repository calls
+     * Get photo calls.
+     * @return photo calls
      */
     override fun getPhotoCall() : IPhotoCall {
         return mPhotoCall
