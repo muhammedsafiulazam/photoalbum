@@ -32,19 +32,31 @@ class AlbumListActivityModel : BaseActivityModel() {
         mServiceManager = getAddOn(AddOnType.SERVICE_MANAGER) as IServiceManager
         mDatabaseManager = getAddOn(AddOnType.DATABASE_MANAGER) as IDatabaseManager
 
+        // Enable receiving events.
         receiveEvents(true)
     }
 
-    private fun updateLoader(busy: Boolean) {
-        val event = Event(AlbumListEventType.UPDATE_LOADER, busy, null)
+    /**
+     * Update loader
+     * @param show flag
+     */
+    private fun updateLoader(show: Boolean) {
+        val event = Event(AlbumListEventType.UPDATE_LOADER, show, null)
         mEventManager.send(event)
     }
 
-    private fun updateMessage(error: Any?) {
-        val event = Event(AlbumListEventType.UPDATE_MESSAGE, error, null)
+    /**
+     * Update message.
+     * @param message message
+     */
+    private fun updateMessage(message: Any?) {
+        val event = Event(AlbumListEventType.UPDATE_MESSAGE, message, null)
         mEventManager.send(event)
     }
 
+    /**
+     * Request to load albums/photos.
+     */
     fun requestLoadAlbums() {
         // Show loader.
         updateLoader(true)
@@ -53,6 +65,10 @@ class AlbumListActivityModel : BaseActivityModel() {
         mServiceManager.getPhotoService().getPhotos()
     }
 
+    /**
+     * Response with list of photo.
+     * @param photoList list of photo.
+     */
     private fun responseLoadAlbums(photoList: List<Photo>?) {
         var albumList: MutableMap<String, Album> = mutableMapOf()
 
@@ -69,6 +85,10 @@ class AlbumListActivityModel : BaseActivityModel() {
         mEventManager.send(event)
     }
 
+    /**
+     * Receive and handle events.
+     * @param event event
+     */
     @Suppress("UNCHECKED_CAST")
     override fun onReceiveEvents(event: Event) {
         if (TextUtils.equals(AlbumListEventType.REQUEST_LOAD_ALBUMS, event.type)) {
@@ -108,7 +128,11 @@ class AlbumListActivityModel : BaseActivityModel() {
         }
     }
 
+    /**
+     * On destroy, clean.
+     */
     override fun onDestroyActivity() {
+        // Disable receiving events.
         receiveEvents(false)
         super.onDestroyActivity()
     }

@@ -61,12 +61,17 @@ class AlbumListActivity : BaseActivity(),
             onClickRetry()
         })
 
+        // Enable receiving events.
         receiveEvents(true)
 
         // Loading request.
         requestLoadAlbums()
     }
 
+    /**
+     * Update loader.
+     * @param show flag
+     */
     fun updateLoader(show: Boolean) {
         if (show) {
             albumlist_ryv_items.visibility = GONE
@@ -77,6 +82,10 @@ class AlbumListActivity : BaseActivity(),
         }
     }
 
+    /**
+     * Update message.
+     * @param message message
+     */
     fun updateMessage(message: Any?) {
         if (message != null) {
             albumlist_ryv_items.visibility = GONE
@@ -99,6 +108,10 @@ class AlbumListActivity : BaseActivity(),
         }
     }
 
+    /**
+     * Update view with list of album.
+     * @param albumList list of album
+     */
     fun updateView(albumList: List<Album>?) {
         albumlist_ryv_items.visibility = VISIBLE
         updateLoader(false)
@@ -119,15 +132,26 @@ class AlbumListActivity : BaseActivity(),
         }
     }
 
+    /**
+     * On click album, load photos.
+     * @param album album
+     */
     override fun onClickAlbum(album: Album) {
         mActivityManager.loadActivity(PhotoListActivity::class.java, album)
     }
 
+    /**
+     * Request model to load albums.
+     */
     private fun requestLoadAlbums() {
         val event = Event(AlbumListEventType.REQUEST_LOAD_ALBUMS, null, null)
         mEventManager.send(event)
     }
 
+    /**
+     * Receive and handle events.
+     * @param event event
+     */
     @Suppress("UNCHECKED_CAST")
     override fun onReceiveEvents(event: Event) {
         if (TextUtils.equals(AlbumListEventType.UPDATE_LOADER, event.type)) {
@@ -140,16 +164,26 @@ class AlbumListActivity : BaseActivity(),
         }
     }
 
+    /**
+     * On click retry, request model to reload albums.
+     */
     private fun onClickRetry() {
         requestLoadAlbums()
     }
 
+    /**
+     * On refresh, request model to relaod albums.
+     */
     override fun onRefresh() {
         albumlist_srl_items.isRefreshing = false
         requestLoadAlbums()
     }
 
+    /**
+     * On destroy, clean.
+     */
     override fun onDestroy() {
+        // Disable receiving events.
         receiveEvents(false)
         super.onDestroy()
     }

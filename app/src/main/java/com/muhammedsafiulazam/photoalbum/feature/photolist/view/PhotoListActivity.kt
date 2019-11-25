@@ -60,12 +60,17 @@ class PhotoListActivity : BaseActivity(),
             onClickRetry()
         })
 
+        // Enable receiving events.
         receiveEvents(true)
 
         // Loading request.
         requestLoadPhotos()
     }
 
+    /**
+     * Update loader.
+     * @param show flag
+     */
     fun updateLoader(show: Boolean) {
         if (show) {
             photolist_ryv_items.visibility = GONE
@@ -76,6 +81,10 @@ class PhotoListActivity : BaseActivity(),
         }
     }
 
+    /**
+     * Update message.
+     * @param message message
+     */
     fun updateMessage(message: Any?) {
         if (message != null) {
             photolist_ryv_items.visibility = GONE
@@ -98,6 +107,10 @@ class PhotoListActivity : BaseActivity(),
         }
     }
 
+    /**
+     * Update view with list of photo.
+     * @param photoList list of photo
+     */
     fun updateView(photoList: List<Photo>?) {
         photolist_ryv_items.visibility = VISIBLE
         updateLoader(false)
@@ -118,15 +131,25 @@ class PhotoListActivity : BaseActivity(),
         }
     }
 
+    /**
+     * On click photo, load photo.
+     */
     override fun onClickPhoto(photo: Photo) {
         mActivityManager.loadActivity(PhotoViewerActivity::class.java, photo)
     }
 
+    /**
+     * Request model to load photos.
+     */
     private fun requestLoadPhotos() {
         val event = Event(PhotoListEventType.REQUEST_LOAD_PHOTOS, getData(), null)
         mEventManager.send(event)
     }
 
+    /**
+     * Receive and handle events.
+     * @param event event
+     */
     @Suppress("UNCHECKED_CAST")
     override fun onReceiveEvents(event: Event) {
         if (TextUtils.equals(PhotoListEventType.UPDATE_LOADER, event.type)) {
@@ -139,16 +162,26 @@ class PhotoListActivity : BaseActivity(),
         }
     }
 
+    /**
+     * On click retry, request model to reload photos.
+     */
     private fun onClickRetry() {
         requestLoadPhotos()
     }
 
+    /**
+     * On refresh, request model to reload photos.
+     */
     override fun onRefresh() {
         photolist_srl_items.isRefreshing = false
         requestLoadPhotos()
     }
 
+    /**
+     * On destroy, clean
+     */
     override fun onDestroy() {
+        // Disable receiving events.
         receiveEvents(false)
         super.onDestroy()
     }

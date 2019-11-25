@@ -48,6 +48,10 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
         loadPhoto()
     }
 
+    /**
+     * Update loader.
+     * @param show flag
+     */
     private fun updateLoader(show: Boolean) {
         if (show) {
             photoviewer_pgb_loader.visibility = View.VISIBLE
@@ -58,6 +62,10 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
         }
     }
 
+    /**
+     * Update message.
+     * @param message message
+     */
     private fun updateMessage(message: String?) {
         if (message != null) {
             photoviewer_txv_message.text = message
@@ -71,10 +79,16 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
         }
     }
 
+    /**
+     * On click retry, reload photo.
+     */
     private fun onClickRetry() {
         loadPhoto()
     }
 
+    /**
+     * On refresh, reload photo.
+     */
     override fun onRefresh() {
         photoviewer_srl_photo.isRefreshing = false
         loadPhoto()
@@ -93,6 +107,9 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
                     updateLoader(false)
                 }
                 override fun onError(e: Exception) {
+                    /**
+                     * In case of failure to load image, try to load thumbnail image.
+                     */
                     PicassoUtils.getPicasso().load(mPhoto.thumbnailUrl).into(photoviewer_phv_photo, object: Callback {
                         override fun onSuccess() {
                             photoviewer_phv_photo.visibility = View.VISIBLE

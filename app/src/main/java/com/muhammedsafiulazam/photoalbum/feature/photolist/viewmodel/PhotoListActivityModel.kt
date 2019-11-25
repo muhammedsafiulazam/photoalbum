@@ -26,19 +26,31 @@ class PhotoListActivityModel : BaseActivityModel() {
         mEventManager = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager
         mServiceManager = getAddOn(AddOnType.SERVICE_MANAGER) as IServiceManager
 
+        // Enable receiving events.
         receiveEvents(true)
     }
 
-    private fun updateLoader(busy: Boolean) {
-        val event = Event(PhotoListEventType.UPDATE_LOADER, busy, null)
+    /**
+     * Update loader.
+     * @param show flag
+     */
+    private fun updateLoader(show: Boolean) {
+        val event = Event(PhotoListEventType.UPDATE_LOADER, show, null)
         mEventManager.send(event)
     }
 
-    private fun updateMessage(error: String?) {
-        val event = Event(PhotoListEventType.UPDATE_MESSAGE, error, null)
+    /**
+     * Update message.
+     * @param message message
+     */
+    private fun updateMessage(message: String?) {
+        val event = Event(PhotoListEventType.UPDATE_MESSAGE, message, null)
         mEventManager.send(event)
     }
 
+    /**
+     * Request to load photos.
+     */
     fun requestLoadPhotos() {
         // Show loader.
         updateLoader(false)
@@ -46,11 +58,19 @@ class PhotoListActivityModel : BaseActivityModel() {
         responseLoadPhotos(mAlbum.photos)
     }
 
+    /**
+     * Response with list of photos.
+     * @param response response
+     */
     private fun responseLoadPhotos(response: Any?) {
         val event = Event(PhotoListEventType.RESPONSE_LOAD_PHOTOS, response, null)
         mEventManager.send(event)
     }
 
+    /**
+     * Receive and handle events.
+     * @param event event
+     */
     override fun onReceiveEvents(event: Event) {
         if (TextUtils.equals(PhotoListEventType.REQUEST_LOAD_PHOTOS, event.type)) {
             mAlbum = event.data as Album
@@ -58,7 +78,11 @@ class PhotoListActivityModel : BaseActivityModel() {
         }
     }
 
+    /**
+     * On destroy, clean.
+     */
     override fun onDestroyActivity() {
+        // Disable receiving events.
         receiveEvents(false)
         super.onDestroyActivity()
     }
