@@ -42,7 +42,16 @@ class ActivityManager : AddOn(), IActivityManager {
      * @param activity activity class
      */
     override fun loadActivity(activity: Class<out BaseActivity>) {
-        loadActivity(activity, null)
+        loadActivity(activity, null, null)
+    }
+
+    /**
+     * Load activity with flags.
+     * @param activity activity class
+     * @param flags flags
+     */
+    override fun loadActivity(activity: Class<out BaseActivity>, flags: Int?) {
+        loadActivity(activity, flags, null)
     }
 
     /**
@@ -51,8 +60,22 @@ class ActivityManager : AddOn(), IActivityManager {
      * @param data data
      */
     override fun loadActivity(activity: Class<out BaseActivity>, data: Parcelable?) {
+        loadActivity(activity, null, data)
+    }
+
+    /**
+     * Load activity with flags and data.
+     * @param activity activity class
+     * @param flags flags
+     * @param data data
+     */
+    override fun loadActivity(activity: Class<out BaseActivity>, flags: Int?, data: Parcelable?) {
         if (mCurrentActivity != null) {
             val intent = Intent(mCurrentActivity, activity)
+
+            if (flags != null) {
+                intent.setFlags(flags)
+            }
 
             if (data != null) {
                 intent.putExtra(BaseActivity.KEY_DATA, data)

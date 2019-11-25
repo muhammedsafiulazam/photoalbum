@@ -7,6 +7,8 @@ import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.view.AlbumListActivity
 
+
+
 /**
  * Created by Muhammed Safiul Azam on 24/07/2019.
  */
@@ -24,5 +26,8 @@ class LaunchActivity : BaseActivity() {
         // Entry activity.
         val activityManager: IActivityManager = getAddOn(AddOnType.ACTIVITY_MANAGER) as IActivityManager
         activityManager.loadActivity(AlbumListActivity::class.java)
+
+        // Finish.
+        finish()
     }
 }

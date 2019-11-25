@@ -33,9 +33,24 @@ interface IActivityManager : IAddOn {
     fun loadActivity(activity: Class<out BaseActivity>)
 
     /**
+     * Load activity with flags.
+     * @param activity activity class
+     * @param flags flags
+     */
+    fun loadActivity(activity: Class<out BaseActivity>, flags: Int?)
+
+    /**
      * Load activity with data.
      * @param activity activity class
      * @param data data
      */
     fun loadActivity(activity: Class<out BaseActivity>, data: Parcelable?)
+
+    /**
+     * Load activity with flags and data.
+     * @param activity activity class
+     * @param flags flags
+     * @param data data
+     */
+    fun loadActivity(activity: Class<out BaseActivity>, flags: Int?, data: Parcelable?)
 }
