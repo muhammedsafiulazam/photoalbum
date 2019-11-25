@@ -19,7 +19,7 @@ Sources:
 
 Configurations:
 1. CircleCI ( Unit tests ).
-2. JoCoCo ( Test coverage ).
+2. JaCoCo ( Test coverage ).
 
 Thank you.
 
