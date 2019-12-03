@@ -11,7 +11,7 @@ import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import com.muhammedsafiulazam.vinci.Vinci
-import com.muhammedsafiulazam.vinci.Callback
+import com.muhammedsafiulazam.vinci.VinciCallback
 import kotlinx.android.synthetic.main.activity_photoviewer.*
 
 /**
@@ -96,7 +96,7 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
         // Show loader.
         updateLoader(true)
 
-        Vinci.load(mPhoto.url!!, photoviewer_phv_photo, object: Callback {
+        Vinci.load(mPhoto.url!!, photoviewer_phv_photo, object: VinciCallback {
             override fun onSuccess(url: String, bitmap: Bitmap) {
                 photoviewer_phv_photo.visibility = View.VISIBLE
                 // Better viewer control.
@@ -106,7 +106,7 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
 
             override fun onFailure(url: String, throwable: Throwable) {
 
-                Vinci.load(mPhoto.thumbnailUrl!!, photoviewer_phv_photo, object: Callback {
+                Vinci.load(mPhoto.thumbnailUrl!!, photoviewer_phv_photo, object: VinciCallback {
                     override fun onSuccess(url: String, bitmap: Bitmap) {
                         photoviewer_phv_photo.visibility = View.VISIBLE
                         // Better viewer control.

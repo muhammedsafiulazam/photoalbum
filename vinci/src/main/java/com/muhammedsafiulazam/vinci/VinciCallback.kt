@@ -2,7 +2,11 @@ package com.muhammedsafiulazam.vinci
 
 import android.graphics.Bitmap
 
-interface Callback {
+/**
+ * VinciCallback allows to result with callback.
+ */
+
+interface VinciCallback {
     /**
      * On success callback.
      * @param url associate url
@@ -13,7 +17,7 @@ interface Callback {
     /**
      * On failure callback.
      * @param url associate url
-     * @param error associate error
+     * @param throwable associate throwable
      */
     fun onFailure(url: String, throwable: Throwable)
 }

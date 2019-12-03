@@ -11,7 +11,7 @@ import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.feature.photolist.listener.IPhotoListListener
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.vinci.Vinci
-import com.muhammedsafiulazam.vinci.Callback
+import com.muhammedsafiulazam.vinci.VinciCallback
 
 /**
  * Created by Muhammed Safiul Azam on 19/11/2019.
@@ -43,7 +43,7 @@ class PhotoListViewHolder(view: View, albumListListener: IPhotoListListener) : R
         mImvThumbnail.setImageDrawable(null)
         mPgbLoader.visibility = View.VISIBLE
 
-        Vinci.load(mPhoto!!.thumbnailUrl!!, mImvThumbnail, object: Callback {
+        Vinci.load(mPhoto!!.thumbnailUrl!!, mImvThumbnail, object: VinciCallback {
             override fun onSuccess(url: String, bitmap: Bitmap) {
                 mPgbLoader.visibility = View.GONE
                 mImvThumbnail.scaleType = ImageView.ScaleType.FIT_CENTER
