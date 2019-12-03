@@ -9,6 +9,7 @@ import com.muhammedsafiulazam.photoalbum.network.queue.QueueManager
 import com.muhammedsafiulazam.photoalbum.network.retrofit.RetrofitManager
 import com.muhammedsafiulazam.photoalbum.network.server.ServerManager
 import com.muhammedsafiulazam.photoalbum.network.service.ServiceManager
+import com.muhammedsafiulazam.photoalbum.picture.PictureManager
 
 object AddOnManager : AddOn(), IAddOnManager {
 
@@ -29,6 +30,9 @@ object AddOnManager : AddOn(), IAddOnManager {
         val retrofitManager = RetrofitManager()
         val queueManager = QueueManager()
         val databaseManager = DatabaseManager()
+        val pictureManager = PictureManager()
+        // Use Vinci loader.
+        pictureManager.useLoader(PictureManager.LOADER_VINCI)
 
         // Now assign individually.
 
@@ -52,5 +56,6 @@ object AddOnManager : AddOn(), IAddOnManager {
         addAddOn(AddOnType.RETROFIT_MANAGER, retrofitManager)
         addAddOn(AddOnType.QUEUE_MANAGER, queueManager)
         addAddOn(AddOnType.DATABASE_MANAGER, databaseManager)
+        addAddOn(AddOnType.PICTURE_MANAGER, pictureManager)
     }
 }

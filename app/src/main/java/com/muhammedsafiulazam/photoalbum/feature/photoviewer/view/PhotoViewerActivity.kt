@@ -1,5 +1,6 @@
 package com.muhammedsafiulazam.photoalbum.feature.photoviewer.view
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -7,14 +8,15 @@ import android.view.WindowManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
+import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
+import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
+import com.muhammedsafiulazam.photoalbum.picture.IPictureManager
+import com.muhammedsafiulazam.photoalbum.picture.PictureCallback
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
-import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
-import com.muhammedsafiulazam.photoalbum.utils.PicassoUtils
-import com.squareup.picasso.Callback
+import com.muhammedsafiulazam.vinci.Vinci
+import com.muhammedsafiulazam.vinci.VinciCallback
 import kotlinx.android.synthetic.main.activity_photoviewer.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 /**
  * Created by Muhammed Safiul Azam on 24/07/2019.
@@ -22,6 +24,7 @@ import kotlinx.coroutines.launch
 
 class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener {
 
+    private lateinit var mPictureManager: IPictureManager
     private lateinit var mPhoto: Photo
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +36,7 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
 
         setContentView(R.layout.activity_photoviewer)
 
+        mPictureManager = AddOnManager.getAddOn(AddOnType.PICTURE_MANAGER) as IPictureManager
         mPhoto = getData() as Photo
 
         photoviewer_srl_photo.setOnRefreshListener(this)
@@ -98,36 +102,35 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
         // Show loader.
         updateLoader(true)
 
-        CoroutineScope(CoroutineUtils.DISPATCHER_MAIN).launch {
-            PicassoUtils.getPicasso().load(mPhoto.url).into(photoviewer_phv_photo, object: Callback {
-                override fun onSuccess() {
-                    photoviewer_phv_photo.visibility = View.VISIBLE
-                    // Better viewer control.
-                    photoviewer_srl_photo.isEnabled = false
-                    updateLoader(false)
-                }
-                override fun onError(e: Exception) {
-                    /**
-                     * In case of failure to load image, try to load thumbnail image.
-                     */
-                    PicassoUtils.getPicasso().load(mPhoto.thumbnailUrl).into(photoviewer_phv_photo, object: Callback {
-                        override fun onSuccess() {
-                            photoviewer_phv_photo.visibility = View.VISIBLE
-                            // Better viewer control.
-                            photoviewer_srl_photo.isEnabled = false
-                            updateLoader(false)
-                        }
-                        override fun onError(e: Exception) {
-                            if (!ConnectivityUtils.isOnline()) {
-                                updateMessage(getString(R.string.photoviewer_no_connectivity))
+        mPictureManager.load(mPhoto.url!!, photoviewer_phv_photo, object: PictureCallback {
+            override fun onSuccess(url: String, bitmap: Bitmap) {
+                photoviewer_phv_photo.visibility = View.VISIBLE
+                // Better viewer control.
+                photoviewer_srl_photo.isEnabled = false
+                updateLoader(false)
+            }
 
-                            } else {
-                                updateMessage(getString(R.string.photoviewer_error_load))
-                            }
+            override fun onFailure(url: String, throwable: Throwable) {
+
+                mPictureManager.load(mPhoto.thumbnailUrl!!, photoviewer_phv_photo, object: PictureCallback {
+                    override fun onSuccess(url: String, bitmap: Bitmap) {
+                        photoviewer_phv_photo.visibility = View.VISIBLE
+                        // Better viewer control.
+                        photoviewer_srl_photo.isEnabled = false
+                        updateLoader(false)
+                    }
+
+                    override fun onFailure(url: String, throwable: Throwable) {
+                        if (!ConnectivityUtils.isOnline()) {
+                            updateMessage(getString(R.string.photoviewer_no_connectivity))
+
+                        } else {
+                            updateMessage(getString(R.string.photoviewer_error_load))
                         }
-                    })
-                }
-            })
-        }
+                    }
+
+                })
+            }
+        })
     }
 }

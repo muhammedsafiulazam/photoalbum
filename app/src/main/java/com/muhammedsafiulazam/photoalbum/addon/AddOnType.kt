@@ -17,4 +17,5 @@ object AddOnType {
     const val RETROFIT_MANAGER: String = TAG + "RETROFIT_MANAGER"
     const val QUEUE_MANAGER: String = TAG + "QUEUE_MANAGER"
     const val DATABASE_MANAGER: String = TAG + "DATABASE_MANAGER"
+    const val PICTURE_MANAGER: String = TAG + "PICTURE_MANAGER"
 }
