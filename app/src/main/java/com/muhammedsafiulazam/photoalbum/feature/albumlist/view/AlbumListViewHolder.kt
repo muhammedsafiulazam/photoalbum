@@ -1,5 +1,6 @@
 package com.muhammedsafiulazam.photoalbum.feature.albumlist.view
 
+import android.graphics.Bitmap
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -9,11 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.listener.IAlbumListListener
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
-import com.muhammedsafiulazam.photoalbum.utils.CoroutineUtils
-import com.muhammedsafiulazam.photoalbum.utils.PicassoUtils
-import com.squareup.picasso.Callback
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import com.muhammedsafiulazam.vinci.Vinci
+import com.muhammedsafiulazam.vinci.Callback
 
 /**
  * Created by Muhammed Safiul Azam on 19/11/2019.
@@ -45,19 +43,18 @@ class AlbumListViewHolder(view: View, albumListListener: IAlbumListListener) : R
         mImvThumbnail.setImageDrawable(null)
         mPgbLoader.visibility = View.VISIBLE
 
-        CoroutineScope(CoroutineUtils.DISPATCHER_MAIN).launch {
-            PicassoUtils.getPicasso().load(mAlbum!!.thumbnailUrl).into(mImvThumbnail, object: Callback {
-                override fun onSuccess() {
-                    mPgbLoader.visibility = View.GONE
-                    mImvThumbnail.scaleType = ImageView.ScaleType.CENTER_CROP
-                }
+        Vinci.load(mAlbum!!.thumbnailUrl!!, mImvThumbnail, object: Callback {
+            override fun onSuccess(url: String, bitmap: Bitmap) {
+                mPgbLoader.visibility = View.GONE
+                mImvThumbnail.scaleType = ImageView.ScaleType.CENTER_CROP
+            }
 
-                override fun onError(e: Exception) {
-                    mPgbLoader.visibility = View.GONE
-                    mImvThumbnail.scaleType = ImageView.ScaleType.CENTER
-                    mImvThumbnail.setImageResource(R.drawable.ic_cloud_off_black)
-                }
-            })
-        }
+            override fun onFailure(url: String, throwable: Throwable) {
+                mPgbLoader.visibility = View.GONE
+                mImvThumbnail.scaleType = ImageView.ScaleType.CENTER
+                mImvThumbnail.setImageResource(R.drawable.ic_cloud_off_black)
+            }
+
+        })
     }
 }

@@ -115,6 +115,8 @@ dependencies {
     // Multidex.
     implementation 'com.android.support:multidex:2.0.1'
 
+    implementation project(':vinci')
+
     // Test libraries.
 
     // Core.
