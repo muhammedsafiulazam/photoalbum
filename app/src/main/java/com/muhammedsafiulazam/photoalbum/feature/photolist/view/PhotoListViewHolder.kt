@@ -8,8 +8,12 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammedsafiulazam.photoalbum.R
+import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
+import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.feature.photolist.listener.IPhotoListListener
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
+import com.muhammedsafiulazam.photoalbum.picture.IPictureManager
+import com.muhammedsafiulazam.photoalbum.picture.PictureCallback
 import com.muhammedsafiulazam.vinci.Vinci
 import com.muhammedsafiulazam.vinci.VinciCallback
 
@@ -18,6 +22,7 @@ import com.muhammedsafiulazam.vinci.VinciCallback
  */
 
 class PhotoListViewHolder(view: View, albumListListener: IPhotoListListener) : RecyclerView.ViewHolder(view){
+    private var mPictureManager: IPictureManager
     private var mView: View
     private var mTxvTitle: AppCompatTextView
     private var mPgbLoader: ProgressBar
@@ -25,6 +30,8 @@ class PhotoListViewHolder(view: View, albumListListener: IPhotoListListener) : R
     private var mPhoto: Photo? = null
 
     init {
+        mPictureManager = AddOnManager.getAddOn(AddOnType.PICTURE_MANAGER) as IPictureManager
+
         mView = view
         mTxvTitle = view.findViewById(R.id.photo_txv_title)
         mPgbLoader = view.findViewById(R.id.photo_pgb_loader)
@@ -43,7 +50,7 @@ class PhotoListViewHolder(view: View, albumListListener: IPhotoListListener) : R
         mImvThumbnail.setImageDrawable(null)
         mPgbLoader.visibility = View.VISIBLE
 
-        Vinci.load(mPhoto!!.thumbnailUrl!!, mImvThumbnail, object: VinciCallback {
+        mPictureManager.load(mPhoto!!.thumbnailUrl!!, mImvThumbnail, object: PictureCallback {
             override fun onSuccess(url: String, bitmap: Bitmap) {
                 mPgbLoader.visibility = View.GONE
                 mImvThumbnail.scaleType = ImageView.ScaleType.FIT_CENTER

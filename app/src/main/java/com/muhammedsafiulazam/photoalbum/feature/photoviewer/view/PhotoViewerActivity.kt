@@ -8,7 +8,11 @@ import android.view.WindowManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
 import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
+import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
+import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
+import com.muhammedsafiulazam.photoalbum.picture.IPictureManager
+import com.muhammedsafiulazam.photoalbum.picture.PictureCallback
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
 import com.muhammedsafiulazam.vinci.Vinci
 import com.muhammedsafiulazam.vinci.VinciCallback
@@ -20,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_photoviewer.*
 
 class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener {
 
+    private lateinit var mPictureManager: IPictureManager
     private lateinit var mPhoto: Photo
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +36,7 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
 
         setContentView(R.layout.activity_photoviewer)
 
+        mPictureManager = AddOnManager.getAddOn(AddOnType.PICTURE_MANAGER) as IPictureManager
         mPhoto = getData() as Photo
 
         photoviewer_srl_photo.setOnRefreshListener(this)
@@ -96,7 +102,7 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
         // Show loader.
         updateLoader(true)
 
-        Vinci.load(mPhoto.url!!, photoviewer_phv_photo, object: VinciCallback {
+        mPictureManager.load(mPhoto.url!!, photoviewer_phv_photo, object: PictureCallback {
             override fun onSuccess(url: String, bitmap: Bitmap) {
                 photoviewer_phv_photo.visibility = View.VISIBLE
                 // Better viewer control.
@@ -106,7 +112,7 @@ class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener
 
             override fun onFailure(url: String, throwable: Throwable) {
 
-                Vinci.load(mPhoto.thumbnailUrl!!, photoviewer_phv_photo, object: VinciCallback {
+                mPictureManager.load(mPhoto.thumbnailUrl!!, photoviewer_phv_photo, object: PictureCallback {
                     override fun onSuccess(url: String, bitmap: Bitmap) {
                         photoviewer_phv_photo.visibility = View.VISIBLE
                         // Better viewer control.

@@ -15,13 +15,28 @@ import java.util.concurrent.Future
  * It uses minimum threads and lazy loading to download images.
  */
 
-object Vinci {
+class Vinci {
+
+    companion object {
+        // Singleton instance.
+        private var vinci: Vinci = Vinci()
+
+        // Get singleton instance.
+        fun get() : Vinci {
+            return vinci
+        }
+
+        // Set singleton instance.
+        fun setSingleInstance(vinci: Vinci) {
+            this.vinci = vinci
+        }
+    }
 
     /**
      * Thread pool size.
      * Please keep it minimum.
      */
-    private const val THREAD_POOL_SIZE: Int = 2
+    private val THREAD_POOL_SIZE: Int = 2
 
     /**
      * Executor which uses minimum pool size.
