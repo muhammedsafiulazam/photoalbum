@@ -8,8 +8,8 @@ import android.view.View.VISIBLE
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
-import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
-import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
+import com.muhammedsafiulazam.photoalbum.view.BaseView
+import com.muhammedsafiulazam.photoalbum.view.IViewManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
@@ -26,10 +26,10 @@ import kotlinx.android.synthetic.main.activity_photolist.*
  * Created by Muhammed Safiul Azam on 19/11/2019.
  */
 
-class PhotoListActivity : BaseActivity(),
+class PhotoListActivity : BaseView(),
     IPhotoListListener, SwipeRefreshLayout.OnRefreshListener {
     private lateinit var mEventManager: IEventManager
-    private lateinit var mActivityManager: IActivityManager
+    private lateinit var mActivityManager: IViewManager
     private val mPhotoList: MutableList<Photo> = mutableListOf()
     private val mPhotoListAdapter: PhotoListAdapter by lazy {
         PhotoListAdapter(mPhotoList, this)
@@ -42,7 +42,7 @@ class PhotoListActivity : BaseActivity(),
         setActivityModel(PhotoListActivityModel::class.java)
 
         mEventManager = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager
-        mActivityManager = getAddOn(AddOnType.ACTIVITY_MANAGER) as IActivityManager
+        mActivityManager = getAddOn(AddOnType.VIEW_MANAGER) as IViewManager
 
         updateMessage(null)
         updateLoader(false)
@@ -135,14 +135,14 @@ class PhotoListActivity : BaseActivity(),
      * On click photo, load photo.
      */
     override fun onClickPhoto(photo: Photo) {
-        mActivityManager.loadActivity(PhotoViewerActivity::class.java, photo)
+        mActivityManager.loadView(PhotoViewerActivity::class.java, photo)
     }
 
     /**
-     * Request model to load photos.
+     * Request to load photos.
      */
     private fun requestLoadPhotos() {
-        val event = Event(PhotoListEventType.REQUEST_LOAD_PHOTOS, getData(), null)
+        val event = Event(PhotoListEventType.VIEWMODEL_REQUEST_LOAD_PHOTOS, getData(), null)
         mEventManager.send(event)
     }
 
@@ -152,11 +152,11 @@ class PhotoListActivity : BaseActivity(),
      */
     @Suppress("UNCHECKED_CAST")
     override fun onReceiveEvents(event: Event) {
-        if (TextUtils.equals(PhotoListEventType.UPDATE_LOADER, event.type)) {
+        if (TextUtils.equals(PhotoListEventType.VIEW_UPDATE_LOADER, event.type)) {
             updateLoader(event.data as Boolean)
-        } else if (TextUtils.equals(PhotoListEventType.UPDATE_MESSAGE, event.type)) {
+        } else if (TextUtils.equals(PhotoListEventType.VIEW_UPDATE_MESSAGE, event.type)) {
             updateMessage(event.data)
-        } else if (TextUtils.equals(PhotoListEventType.RESPONSE_LOAD_PHOTOS, event.type)) {
+        } else if (TextUtils.equals(PhotoListEventType.VIEWMODEL_RESPONSE_LOAD_PHOTOS, event.type)) {
             val photoList: List<Photo>? = event.data as List<Photo>?
             updateView(photoList)
         }

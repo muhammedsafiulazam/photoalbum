@@ -21,7 +21,7 @@ import com.muhammedsafiulazam.vinci.VinciCallback
  * Created by Muhammed Safiul Azam on 19/11/2019.
  */
 
-class AlbumListViewHolder(view: View, albumListListener: IAlbumListListener) : RecyclerView.ViewHolder(view){
+class AlbumListViewHolder(view: View, listener: IAlbumListListener) : RecyclerView.ViewHolder(view){
     private var mPictureManager: IPictureManager
     private var mView: View
     private var mTxvTitle: AppCompatTextView
@@ -39,7 +39,7 @@ class AlbumListViewHolder(view: View, albumListListener: IAlbumListListener) : R
         mPgbLoader.visibility = View.GONE
 
         view.setOnClickListener {
-            albumListListener.onClickAlbum(mAlbum!!)
+            listener.onClickAlbum(mAlbum!!)
         }
     }
 

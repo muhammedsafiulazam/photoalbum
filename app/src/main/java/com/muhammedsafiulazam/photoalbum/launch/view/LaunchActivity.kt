@@ -2,8 +2,8 @@ package com.muhammedsafiulazam.photoalbum.launch.view
 
 import android.os.Bundle
 import com.muhammedsafiulazam.photoalbum.R
-import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
-import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
+import com.muhammedsafiulazam.photoalbum.view.BaseView
+import com.muhammedsafiulazam.photoalbum.view.IViewManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.feature.albumlist.view.AlbumListActivity
 
@@ -13,7 +13,7 @@ import com.muhammedsafiulazam.photoalbum.feature.albumlist.view.AlbumListActivit
  * Created by Muhammed Safiul Azam on 24/07/2019.
  */
 
-class LaunchActivity : BaseActivity() {
+class LaunchActivity : BaseView() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +24,8 @@ class LaunchActivity : BaseActivity() {
         super.onStart()
 
         // Entry activity.
-        val activityManager: IActivityManager = getAddOn(AddOnType.ACTIVITY_MANAGER) as IActivityManager
-        activityManager.loadActivity(AlbumListActivity::class.java)
+        val activityManager: IViewManager = getAddOn(AddOnType.VIEW_MANAGER) as IViewManager
+        activityManager.loadView(AlbumListActivity::class.java)
 
         // Finish.
         finish()

@@ -10,7 +10,7 @@ object AddOnType {
 
     // Types.
     const val CONTEXT_MANAGER: String = TAG + "CONTEXT_MANAGER"
-    const val ACTIVITY_MANAGER: String = TAG + "ACTIVITY_MANAGER"
+    const val VIEW_MANAGER: String = TAG + "VIEW_MANAGER"
     const val SERVER_MANAGER: String = TAG + "SERVER_MANAGER"
     const val SERVICE_MANAGER: String = TAG + "SERVICE_MANAGER"
     const val EVENT_MANAGER: String = TAG + "EVENT_MANAGER"

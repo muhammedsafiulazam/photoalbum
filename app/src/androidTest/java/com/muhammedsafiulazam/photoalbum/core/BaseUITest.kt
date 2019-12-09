@@ -6,7 +6,7 @@ import android.content.res.Resources
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import androidx.test.runner.lifecycle.Stage
-import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
+import com.muhammedsafiulazam.photoalbum.view.BaseView
 import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
@@ -74,7 +74,7 @@ open class BaseUITest {
         return activity
     }
 
-    fun assertActivity(activity: Class<out BaseActivity>) {
+    fun assertActivity(activity: Class<out BaseView>) {
         val currentActivity: Activity? = getActivity()
         assertTrue(currentActivity != null && currentActivity::class.java.equals(activity::class.java))
     }

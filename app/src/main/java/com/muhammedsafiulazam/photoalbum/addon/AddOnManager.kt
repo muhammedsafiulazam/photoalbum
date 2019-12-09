@@ -1,7 +1,7 @@
 package com.muhammedsafiulazam.photoalbum.addon
 
 import android.content.Context
-import com.muhammedsafiulazam.photoalbum.activity.ActivityManager
+import com.muhammedsafiulazam.photoalbum.view.ViewManager
 import com.muhammedsafiulazam.photoalbum.context.ContextManager
 import com.muhammedsafiulazam.photoalbum.database.DatabaseManager
 import com.muhammedsafiulazam.photoalbum.event.EventManager
@@ -23,7 +23,7 @@ object AddOnManager : AddOn(), IAddOnManager {
     private fun onInitialize() {
 
         val contextManager = ContextManager(mContext)
-        val activityManager = ActivityManager()
+        val activityManager = ViewManager()
         val serverManager = ServerManager()
         val serviceManager = ServiceManager()
         val eventManager = EventManager()
@@ -49,7 +49,7 @@ object AddOnManager : AddOn(), IAddOnManager {
         databaseManager.addAddOn(AddOnType.CONTEXT_MANAGER, contextManager)
 
         addAddOn(AddOnType.CONTEXT_MANAGER, contextManager)
-        addAddOn(AddOnType.ACTIVITY_MANAGER, activityManager)
+        addAddOn(AddOnType.VIEW_MANAGER, activityManager)
         addAddOn(AddOnType.SERVER_MANAGER, serverManager)
         addAddOn(AddOnType.SERVICE_MANAGER, serviceManager)
         addAddOn(AddOnType.EVENT_MANAGER, eventManager)

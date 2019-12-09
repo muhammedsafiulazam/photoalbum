@@ -8,8 +8,8 @@ import android.view.View.VISIBLE
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
-import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
-import com.muhammedsafiulazam.photoalbum.activity.IActivityManager
+import com.muhammedsafiulazam.photoalbum.view.BaseView
+import com.muhammedsafiulazam.photoalbum.view.IViewManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
 import com.muhammedsafiulazam.photoalbum.event.Event
 import com.muhammedsafiulazam.photoalbum.event.IEventManager
@@ -26,11 +26,11 @@ import kotlinx.android.synthetic.main.activity_albumlist.*
  * Created by Muhammed Safiul Azam on 19/11/2019.
  */
 
-class AlbumListActivity : BaseActivity(),
+class AlbumListActivity : BaseView(),
     IAlbumListListener, SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var mEventManager: IEventManager
-    private lateinit var mActivityManager: IActivityManager
+    private lateinit var mActivityManager: IViewManager
     private val mAlbumList: MutableList<Album> = mutableListOf()
     private val mAlbumListAdapter: AlbumListAdapter by lazy {
         AlbumListAdapter(mAlbumList, this)
@@ -43,7 +43,7 @@ class AlbumListActivity : BaseActivity(),
         setActivityModel(AlbumListActivityModel::class.java)
 
         mEventManager = getAddOn(AddOnType.EVENT_MANAGER) as IEventManager
-        mActivityManager = getAddOn(AddOnType.ACTIVITY_MANAGER) as IActivityManager
+        mActivityManager = getAddOn(AddOnType.VIEW_MANAGER) as IViewManager
 
         updateMessage(null)
         updateLoader(false)
@@ -137,14 +137,14 @@ class AlbumListActivity : BaseActivity(),
      * @param album album
      */
     override fun onClickAlbum(album: Album) {
-        mActivityManager.loadActivity(PhotoListActivity::class.java, album)
+        mActivityManager.loadView(PhotoListActivity::class.java, album)
     }
 
     /**
-     * Request model to load albums.
+     * Request to load albums.
      */
     private fun requestLoadAlbums() {
-        val event = Event(AlbumListEventType.REQUEST_LOAD_ALBUMS, null, null)
+        val event = Event(AlbumListEventType.VIEWMODEL_REQUEST_LOAD_ALBUMS, null, null)
         mEventManager.send(event)
     }
 
@@ -154,11 +154,11 @@ class AlbumListActivity : BaseActivity(),
      */
     @Suppress("UNCHECKED_CAST")
     override fun onReceiveEvents(event: Event) {
-        if (TextUtils.equals(AlbumListEventType.UPDATE_LOADER, event.type)) {
+        if (TextUtils.equals(AlbumListEventType.VIEW_UPDATE_LOADER, event.type)) {
             updateLoader(event.data as Boolean)
-        } else if (TextUtils.equals(AlbumListEventType.UPDATE_MESSAGE, event.type)) {
+        } else if (TextUtils.equals(AlbumListEventType.VIEW_UPDATE_MESSAGE, event.type)) {
             updateMessage(event.data)
-        } else if (TextUtils.equals(AlbumListEventType.RESPONSE_LOAD_ALBUMS, event.type)) {
+        } else if (TextUtils.equals(AlbumListEventType.VIEWMODEL_RESPONSE_LOAD_ALBUMS, event.type)) {
             val albumList: List<Album>? = event.data as List<Album>?
             updateView(albumList)
         }
