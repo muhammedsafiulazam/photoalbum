@@ -14,7 +14,7 @@ import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
  * Created by Muhammed Safiul Azam on 19/11/2019.
  */
 
-class PhotoListAdapter(val photoList: MutableList<Photo>, val albumListListener: IPhotoListListener) : RecyclerView.Adapter<PhotoListViewHolder>() {
+class PhotoListAdapter(val photos: MutableList<Photo>, val listener: IPhotoListListener) : RecyclerView.Adapter<PhotoListViewHolder>() {
 
     companion object {
         const val SPAN_SIZE: Int = 3
@@ -31,16 +31,16 @@ class PhotoListAdapter(val photoList: MutableList<Photo>, val albumListListener:
 
         return PhotoListViewHolder(
             view,
-            albumListListener
+            listener
         )
     }
 
     override fun getItemCount(): Int {
-        return photoList.size
+        return photos.size
     }
 
     override fun onBindViewHolder(holder: PhotoListViewHolder, index: Int) {
-        val photo: Photo = photoList.get(index)
+        val photo: Photo = photos.get(index)
 
         val layoutParams = holder.itemView.getLayoutParams() as GridLayoutManager.LayoutParams
 

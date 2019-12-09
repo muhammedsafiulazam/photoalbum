@@ -14,7 +14,7 @@ import com.muhammedsafiulazam.photoalbum.feature.albumlist.model.Album
  * Created by Muhammed Safiul Azam on 19/11/2019.
  */
 
-class AlbumListAdapter(val albumList: MutableList<Album>, val albumListListener: IAlbumListListener) : RecyclerView.Adapter<AlbumListViewHolder>() {
+class AlbumListAdapter(val albums: MutableList<Album>, val listener: IAlbumListListener) : RecyclerView.Adapter<AlbumListViewHolder>() {
 
     companion object {
         const val SPAN_SIZE: Int = 2
@@ -31,16 +31,16 @@ class AlbumListAdapter(val albumList: MutableList<Album>, val albumListListener:
 
         return AlbumListViewHolder(
             view,
-            albumListListener
+            listener
         )
     }
 
     override fun getItemCount(): Int {
-        return albumList.size
+        return albums.size
     }
 
     override fun onBindViewHolder(holder: AlbumListViewHolder, index: Int) {
-        val album: Album = albumList.get(index);
+        val album: Album = albums.get(index);
 
         val layoutParams = holder.itemView.getLayoutParams() as GridLayoutManager.LayoutParams
 

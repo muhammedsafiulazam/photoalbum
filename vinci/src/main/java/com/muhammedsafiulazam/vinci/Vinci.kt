@@ -98,8 +98,11 @@ class Vinci {
                         }
                     } catch (e: Exception) { // Exception.
                         mHandler.post {
-                            // Invoke callback.
-                            vinciCallback?.onFailure(url, e.cause!!)
+                            var throwable: Throwable? = e.cause
+                            if (throwable == null) {
+                                throwable = Throwable("")
+                            }
+                            vinciCallback?.onFailure(url, throwable)
                         }
                     }
                 }

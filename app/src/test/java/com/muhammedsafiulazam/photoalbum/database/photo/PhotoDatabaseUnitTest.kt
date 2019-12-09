@@ -35,7 +35,7 @@ class PhotoDatabaseUnitTest : BaseUnitTest() {
 
         databaseManager.getPhotoDatabase().savePhotos(UnitDummyUtils.createDummyPhotos())
 
-        delay(DELAY_MINIMUM)
+        delay(DELAY_AVERAGE)
         asserter.assertTrue("getPhotos", e != null && e!!.data != null && e!!.error == null)
     }
 
@@ -57,7 +57,7 @@ class PhotoDatabaseUnitTest : BaseUnitTest() {
 
         databaseManager.getPhotoDatabase().savePhotos(UnitDummyUtils.createDummyPhotos())
 
-        delay(DELAY_MINIMUM)
+        delay(DELAY_AVERAGE)
         asserter.assertTrue("savePhotos", e != null && e!!.data != null && e!!.error == null)
     }
 
@@ -81,7 +81,7 @@ class PhotoDatabaseUnitTest : BaseUnitTest() {
 
         databaseManager.getPhotoDatabase().savePhotos(UnitDummyUtils.createDummyPhotos())
 
-        delay(DELAY_MINIMUM)
+        delay(DELAY_AVERAGE)
         asserter.assertTrue("cleanPhotos", e != null && e!!.data == null && e!!.error == null)
     }
 }

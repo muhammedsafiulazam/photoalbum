@@ -7,22 +7,20 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.muhammedsafiulazam.photoalbum.R
-import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
 import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
+import com.muhammedsafiulazam.photoalbum.view.BaseView
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
 import com.muhammedsafiulazam.photoalbum.picture.IPictureManager
 import com.muhammedsafiulazam.photoalbum.picture.PictureCallback
 import com.muhammedsafiulazam.photoalbum.utils.ConnectivityUtils
-import com.muhammedsafiulazam.vinci.Vinci
-import com.muhammedsafiulazam.vinci.VinciCallback
 import kotlinx.android.synthetic.main.activity_photoviewer.*
 
 /**
  * Created by Muhammed Safiul Azam on 24/07/2019.
  */
 
-class PhotoViewerActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener {
+class PhotoViewerActivity : BaseView(), SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var mPictureManager: IPictureManager
     private lateinit var mPhoto: Photo

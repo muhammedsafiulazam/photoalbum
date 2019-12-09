@@ -9,9 +9,12 @@ object AlbumListEventType {
     const val TAG: String = "ALBUMLIST_EVENT_TYPE_"
 
     // Album list event types.
-    const val UPDATE_LOADER: String = TAG + "UPDATE_BUSY"
-    const val UPDATE_MESSAGE: String = TAG + "UPDATE_ERROR"
+    const val VIEW_UPDATE_LOADER: String = TAG + "VIEW_UPDATE_LOADER"
+    const val VIEW_UPDATE_MESSAGE: String = TAG + "VIEW_UPDATE_MESSAGE"
 
-    const val REQUEST_LOAD_ALBUMS: String = TAG + "REQUEST_LOAD_ALBUMS"
-    const val RESPONSE_LOAD_ALBUMS: String = TAG + "RESPONSE_LOAD_ALBUMS"
+    const val VIEWMODEL_REQUEST_LOAD_ALBUMS: String = TAG + "VIEWMODEL_REQUEST_LOAD_ALBUMS"
+    const val VIEWMODEL_RESPONSE_LOAD_ALBUMS: String = TAG + "VIEWMODEL_RESPONSE_LOAD_ALBUMS"
+
+    const val MODEL_REQUEST_LOAD_ALBUMS: String = TAG + "MODEL_REQUEST_LOAD_ALBUMS"
+    const val MODEL_RESPONSE_LOAD_ALBUMS: String = TAG + "MODEL_RESPONSE_LOAD_ALBUMS"
 }

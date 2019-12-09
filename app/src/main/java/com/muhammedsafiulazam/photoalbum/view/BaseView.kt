@@ -1,6 +1,9 @@
-package com.muhammedsafiulazam.photoalbum.activity
+package com.muhammedsafiulazam.photoalbum.view
 
-import androidx.lifecycle.ViewModel
+import android.os.Bundle
+import android.os.Parcelable
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.muhammedsafiulazam.photoalbum.addon.AddOn
 import com.muhammedsafiulazam.photoalbum.addon.AddOnManager
 import com.muhammedsafiulazam.photoalbum.addon.AddOnType
@@ -13,52 +16,96 @@ import kotlinx.coroutines.channels.ReceiveChannel
  * Created by Muhammed Safiul Azam on 24/07/2019.
  */
 
-open class BaseActivityModel : ViewModel(), IAddOn {
+open class BaseView : AppCompatActivity(), IAddOn {
+    companion object {
+        const val KEY_DATA: String = "KEY_DATA"
+    }
 
     private var mReceiveChannel: ReceiveChannel<Event>? = null
-    private var mActivity: BaseActivity? = null
+    private var mActivityModel: BaseViewModel? = null
     private val mAddOn: AddOn = AddOn()
 
-    /**
-     * Get associated activity.
-     * @return associated activity
-     */
-    fun getActivity() : BaseActivity? {
-        return mActivity
-    }
+    private var isViewReady: Boolean = false
 
-    /**
-     * Set associated activity.
-     * @param associated activity
-     */
-    fun setActivity(activity: BaseActivity?) {
-        mActivity = activity
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    open fun onCreateActivity() {
-        // Essential addons for activity model.
-        addAddOn(AddOnType.SERVICE_MANAGER, AddOnManager.getAddOn(AddOnType.SERVICE_MANAGER)!!)
+        // Essential addons.
+        addAddOn(AddOnType.VIEW_MANAGER, AddOnManager.getAddOn(AddOnType.VIEW_MANAGER)!!)
         addAddOn(AddOnType.EVENT_MANAGER, AddOnManager.getAddOn(AddOnType.EVENT_MANAGER)!!)
-        addAddOn(AddOnType.DATABASE_MANAGER, AddOnManager.getAddOn(AddOnType.DATABASE_MANAGER)!!)
+
+        isViewReady = false
     }
 
-    open fun onStartActivity() {
+    override fun onStart() {
+        super.onStart()
+
+        if (!isViewReady) {
+            isViewReady = true
+            mActivityModel?.onCreate()
+        }
+
+        mActivityModel?.onStart()
+        onActivateActivity()
     }
 
-    open fun onResumeActivity() {
-
+    override fun onResume() {
+        super.onResume()
+        mActivityModel?.onResume()
+        onActivateActivity()
     }
 
-    open fun onPauseActivity() {
-
+    override fun onPause() {
+        onDeactivateActivity()
+        mActivityModel?.onPause()
+        super.onPause()
     }
 
-    open fun onStopActivity() {
+    override fun onStop() {
+        onDeactivateActivity()
+        mActivityModel?.onStop()
+        super.onStop()
     }
 
-    open fun onDestroyActivity() {
+    /**
+     * Get associated data.
+     * @return associated data
+     */
+    fun getData() : Parcelable? {
+        return intent?.getParcelableExtra(KEY_DATA)
+    }
+
+    /**
+     * Get associated activity model.
+     * @return associated activity model
+     */
+    fun getActivityModel() : BaseViewModel? {
+        return mActivityModel
+    }
+
+    /**
+     * Set associated activity model.
+     * @param activityModel associated activity model
+     */
+    fun setActivityModel(activityModel: Class<out BaseViewModel>) {
+        mActivityModel = ViewModelProviders.of(this).get(activityModel)
+    }
+
+    private fun onActivateActivity() {
+        val activityManager: IViewManager? = getAddOn(AddOnType.VIEW_MANAGER) as IViewManager?
+        activityManager?.onStartView(this)
+    }
+
+    private fun onDeactivateActivity() {
+        val activityManager: IViewManager? = getAddOn(AddOnType.VIEW_MANAGER) as IViewManager?
+        activityManager?.onStopView(this)
+    }
+
+    override fun onDestroy() {
         clearAddOns()
+        mActivityModel?.onDestroy()
         receiveEvents(false)
+        super.onDestroy()
     }
 
     /**

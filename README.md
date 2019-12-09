@@ -11,7 +11,7 @@ Features:
 5. Error cases.
 
 Sources:
-1. Architecture: MVVM + AddOn 
+1. Architecture: SOLID + MVVM + CLEAN + AddOn
 2. Managers: Activity + Service + Server + Database + Queue + Event.
 3. Coroutine + Retrofit + RecyclerView + ConstraintLayout + SwipeRefreshLayout.
 4. Events + Callbacks ( BroadcastChannel + ReceiveChannel ).

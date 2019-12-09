@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import com.muhammedsafiulazam.photoalbum.R
-import com.muhammedsafiulazam.photoalbum.activity.BaseActivity
+import com.muhammedsafiulazam.photoalbum.view.BaseView
 import com.muhammedsafiulazam.photoalbum.core.BaseUITest
 import com.muhammedsafiulazam.photoalbum.feature.photoviewer.view.PhotoViewerActivity
 import com.muhammedsafiulazam.photoalbum.network.model.photo.Photo
@@ -40,7 +40,7 @@ class PhotoViewerUITest : BaseUITest() {
      */
     fun loadPhoto() {
         val intent = Intent(getContext(), PhotoViewerActivity::class.java)
-        intent.putExtra(BaseActivity.KEY_DATA, createDummyPhoto())
+        intent.putExtra(BaseView.KEY_DATA, createDummyPhoto())
         mActivityTestRule.launchActivity(intent)
 
         runBlocking {

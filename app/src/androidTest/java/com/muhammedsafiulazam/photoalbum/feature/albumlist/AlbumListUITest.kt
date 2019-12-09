@@ -37,7 +37,7 @@ class AlbumListUITest : BaseUITest() {
      * Load albums.
      */
     fun loadAlbums() {
-        wait(AlbumListEventType.RESPONSE_LOAD_ALBUMS, object : IBeforeWait {
+        wait(AlbumListEventType.VIEWMODEL_RESPONSE_LOAD_ALBUMS, object : IBeforeWait {
             override fun beforeWait() {
                 val intent = Intent(getContext(), AlbumListActivity::class.java)
                 mActivityTestRule.launchActivity(intent)
